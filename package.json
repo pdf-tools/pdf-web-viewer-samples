@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "upgrade": "node scripts/upgrade.js"
+  },
+  "dependencies": {
+    "shelljs": "^0.8.5"
+  }
+}

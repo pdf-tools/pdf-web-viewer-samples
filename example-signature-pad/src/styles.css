@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+}
+.modal.open {
+  display: flex;
+}
+
+.popup {
+  width: 600px;
+  height: 400px;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.ctSignatirePad {
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnBar {
+  text-align: right;
+  padding: 0 20px;
+}
+
+.btn {
+  border: solid 1px #008bd2;
+  font-size: inherit;
+  font-family: inherit;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 20px;
+}
+.btn.primary {
+  color: #ffffff;
+  background-color: #008bd2;
+}
+
+#signatureCanvas {
+  border: solid 1px #e2e2e2;
+}

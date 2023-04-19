@@ -37,6 +37,9 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
   },
+  devServer: {
+    allowedHosts: 'all',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',

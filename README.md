@@ -19,6 +19,7 @@ Explore and experiment with basic usage examples of NPM package [@pdf-tools/four
 ## List of Examples
 
 * Hello world - [open in CodeSandbox](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/example-hello-world)
+* Custom toolbar - [open in CodeSandbox](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/example-custom-toolbar)
 * Open and save documents - [open in CodeSandbox](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/example-open-and-save-documents)
 * Signature pad - [open in CodeSandbox](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/example-signature-pad)
 

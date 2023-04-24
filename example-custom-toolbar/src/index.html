@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">
+      window.PDFTOOLS_FOURHEIGHTS_PDFVIEWING_BASEURL = "./pdfwebviewer/";
+    </script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./pdfwebviewer/pdf-web-viewer.css"
+    />
+    <title>4-Heights® PDF Web Viewer</title>
+  </head>
+  <body>
+    <div class="custom-toolbar">
+      <div class="toolbar primary-toolbar">
+        <div class="left-side">
+          <button class="action-button">
+            <span class="material-icons-outlined">upload_file</span>
+          </button>
+          <button class="action-button">
+            <span class="material-icons-outlined">download_file</span>
+          </button>
+        </div>
+        <div class="mid-side">
+          <div class="pagination">
+            <button class="action-button">
+              <span class="material-icons-outlined">list_alt</span>
+            </button>
+            <div class="pagination-info">
+              <input id="page-input" type="number" value="1" /> of 38
+            </div>
+            <button class="action-button">
+              <span class="material-icons-outlined">chevron_left</span>
+            </button>
+            <button class="action-button">
+              <span class="material-icons-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+        <div class="right-side">
+          <button class="action-button">
+            <span class="material-icons-outlined">search</span>
+          </button>
+          <button class="action-button">
+            <span class="material-icons-outlined">zoom_in</span>
+          </button>
+          <button class="action-button">
+            <span class="material-icons-outlined">menu_book</span>
+          </button>
+        </div>
+      </div>
+      <!-- <div class="toolbar secondary-toolbar">
+        <div id="search-form-field">
+          <span class="search-icon material-icons-outlined">search</span>
+          <input id="search-input" type="text" value="" />
+        </div>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_up</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_down</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">settings</span>
+        </button>
+      </div> -->
+      <div class="toolbar secondary-toolbar">
+        <div id="search-form-field">
+          <span class="search-icon material-icons-outlined">search</span>
+          <input id="search-input" type="text" value="" />
+        </div>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_up</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_down</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">settings</span>
+        </button>
+      </div>
+      <!-- <div class="toolbar secondary-toolbar">
+        <div id="search-form-field">
+          <span class="search-icon material-icons-outlined">search</span>
+          <input id="search-input" type="text" value="" />
+        </div>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_up</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">keyboard_arrow_down</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">settings</span>
+        </button>
+      </div> -->
+    </div>
+    <div id="pdfviewer" style="height: 100vh; width: 100vw"></div>
+  </body>
+</html>

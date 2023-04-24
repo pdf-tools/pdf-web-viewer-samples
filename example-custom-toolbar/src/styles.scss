@@ -1,0 +1,131 @@
+$default-border-radius: 5px;
+$button-size: 40px;
+$primary: rgb(53, 126, 247);
+$primary-hover: rgb(53, 126, 247, 0.1);
+$secondary: rgb(87, 204, 247);
+$secondary-hover: rgb(87, 204, 247, 0.1);
+$default: rgb(140, 140, 140);
+// $toolbar-background: rgb(242, 242, 242);
+$toolbar-background: white;
+
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+.toolbar {
+  background: $toolbar-background;
+  border: 1px solid $default;
+  border-radius: $default-border-radius;
+}
+
+.custom-toolbar {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  width: calc(100vw - 100px);
+  z-index: 2;
+
+  .primary-toolbar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .left-side {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .mid-side {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      .pagination {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .pagination-info {
+          padding: 0 10px;
+
+          #page-input {
+            width: 36px;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .right-side {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .secondary-toolbar {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+
+    #search-form-field {
+      margin-left: 6px;
+      position: relative;
+
+      .search-icon {
+        position: absolute;
+        font-size: 20px;
+        top: 3px;
+        left: 3px;
+        background: $toolbar-background;
+      }
+
+      #search-input {
+        width: 120px;
+        padding-left: 21.5px;
+      }
+    }
+  }
+  
+  .action-button {
+    border: none;
+    transition: all 0.3s ease;
+    color: $default;
+    background: transparent;
+    width: $button-size;
+    height: $button-size;
+    user-select: none;
+
+    &:hover {
+      background: $primary-hover;
+      color: $primary;
+      cursor: pointer;
+    }
+
+    &.active {
+      background: $primary;
+      color: $toolbar-background;
+    }
+  }
+
+  input {
+    height: 20px;
+    text-align: center;
+    border-radius: $default-border-radius;
+  }
+}

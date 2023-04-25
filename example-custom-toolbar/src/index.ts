@@ -22,4 +22,3 @@ pdfViewer.addEventListener('appLoaded', function () {
 })
 
 const customToolbar = new CustomToolbar();
-customToolbar.init();

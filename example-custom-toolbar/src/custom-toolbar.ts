@@ -79,53 +79,63 @@ export default class CustomToolbar {
       layoutDropdownOptionsContainer: document.querySelector('#layout-dropdown .dropdown-options-container') as HTMLDivElement,
       layoutDropdownOptions: document.querySelectorAll('#layout-dropdown .dropdown-options-container .dropdown-option') as NodeListOf<HTMLDivElement>,
     };
+
+    this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
+    this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
+    this.handleToggleLayoutToolbarButtonClicked = this.handleToggleLayoutToolbarButtonClicked.bind(this);
+    this.handleZoomDropdownButtonClicked = this.handleZoomDropdownButtonClicked.bind(this);
+    this.handleZoomDropdownOptionClicked = this.handleZoomDropdownOptionClicked.bind(this);
+    this.handleLayoutDropdownButtonClicked = this.handleLayoutDropdownButtonClicked.bind(this);
+    this.handleLayoutDropdownOptionClicked = this.handleLayoutDropdownOptionClicked.bind(this);
+    this.handleDropdownOutsideClick = this.handleDropdownOutsideClick.bind(this);
+
+    this.init();
   }
 
   init() {
+    this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
+    this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
     this.initDropdowns();
+  }
 
-    this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked.bind(this));
-    this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked.bind(this));
-    this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked.bind(this));
+  destroy() {
+    this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
+    this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
+    this.destroyDropdowns();
   }
 
   private initDropdowns() {
-    this.dom.zoomDropdownButton.addEventListener('click', () => {
-      this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
-      this.refreshDropdowns();
-    });
+    this.dom.zoomDropdownButton.addEventListener('click', this.handleZoomDropdownButtonClicked);
 
     this.dom.zoomDropdownOptions.forEach((dropdownOption) => {
-      dropdownOption.addEventListener('click', () => {
-        console.log(dropdownOption.dataset);
-        this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
-        this.refreshDropdowns();
-      });
-    });
-  
-    this.dom.layoutDropdownButton.addEventListener('click', () => {
-      this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
-      this.refreshDropdowns();
+      dropdownOption.addEventListener('click', this.handleZoomDropdownOptionClicked);
     });
 
+    this.dom.layoutDropdownButton.addEventListener('click', this.handleLayoutDropdownButtonClicked);
+
     this.dom.layoutDropdownOptions.forEach((dropdownOption) => {
-      dropdownOption.addEventListener('click', () => {
-        console.log(dropdownOption.dataset);
-        this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
-        this.refreshDropdowns();
-      });
+      dropdownOption.addEventListener('click', this.handleLayoutDropdownOptionClicked);
     });
   
-    document.addEventListener('click', (event) => {
-      if (this.state.zoomDropdownOpened && !this.dom.zoomDropdown.contains(event.target as Node)) {
-        this.state.zoomDropdownOpened = false;
-        this.refreshDropdowns();
-      }
-      if (this.state.layoutDropdownOpened && !this.dom.layoutDropdown.contains(event.target as Node)) {
-        this.state.layoutDropdownOpened = false;
-        this.refreshDropdowns();
-      }
+    document.addEventListener('click', this.handleDropdownOutsideClick);
+  }
+
+  private destroyDropdowns() {
+    this.dom.zoomDropdownButton.removeEventListener('click', this.handleZoomDropdownButtonClicked);
+
+    this.dom.zoomDropdownOptions.forEach((dropdownOption) => {
+      dropdownOption.removeEventListener('click', this.handleZoomDropdownOptionClicked);
     });
+
+    this.dom.layoutDropdownButton.removeEventListener('click', this.handleLayoutDropdownButtonClicked);
+
+    this.dom.layoutDropdownOptions.forEach((dropdownOption) => {
+      dropdownOption.removeEventListener('click', this.handleLayoutDropdownOptionClicked);
+    });
+  
+    document.removeEventListener('click', this.handleDropdownOutsideClick);
   }
 
   private handleToggleSearchToolbarButtonClicked() {
@@ -149,7 +159,44 @@ export default class CustomToolbar {
     this.refreshSecondaryToolbars();
   }
 
+  private handleZoomDropdownButtonClicked() {
+    this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
+    this.refreshDropdowns();
+  }
+
+  private handleZoomDropdownOptionClicked() {
+    this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
+    // setState
+    this.refreshDropdowns();
+  }
+
+  private handleLayoutDropdownButtonClicked() {
+    this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
+    this.refreshDropdowns();
+  }
+
+  private handleLayoutDropdownOptionClicked() {
+    this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
+    // setState
+    this.refreshDropdowns();
+  }
+
+  private handleDropdownOutsideClick(event: MouseEvent) {
+    if (this.state.zoomDropdownOpened && !this.dom.zoomDropdown.contains(event.target as Node)) {
+      this.state.zoomDropdownOpened = false;
+      this.refreshDropdowns();
+    }
+    if (this.state.layoutDropdownOpened && !this.dom.layoutDropdown.contains(event.target as Node)) {
+      this.state.layoutDropdownOpened = false;
+      this.refreshDropdowns();
+    }
+  }
+
   private refreshSecondaryToolbars() {
+    this.dom.toggleSearchToolbarButton.classList.toggle('active', this.state.searchToolbarOpened);
+    this.dom.toggleZoomToolbarButton.classList.toggle('active', this.state.zoomToolbarOpened);
+    this.dom.toggleLayoutToolbarButton.classList.toggle('active', this.state.layoutToolbarOpened);
+
     this.dom.searchToolbar.style.display = this.state.searchToolbarOpened ? 'flex' : 'none';
     this.dom.zoomToolbar.style.display = this.state.zoomToolbarOpened ? 'flex' : 'none';
     this.dom.layoutToolbar.style.display = this.state.layoutToolbarOpened ? 'flex' : 'none';

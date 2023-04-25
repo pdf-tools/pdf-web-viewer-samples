@@ -15,7 +15,7 @@
     <title>4-Heights® PDF Web Viewer</title>
   </head>
   <body>
-    <div class="custom-toolbar">
+    <div id="custom-toolbar">
       <div class="toolbar primary-toolbar">
         <div class="left-side">
           <button class="action-button">
@@ -42,33 +42,18 @@
           </div>
         </div>
         <div class="right-side">
-          <button class="action-button">
+          <button id="toggle-search-button"  class="action-button">
             <span class="material-icons-outlined">search</span>
           </button>
-          <button class="action-button">
+          <button id="toggle-zoom-button" class="action-button">
             <span class="material-icons-outlined">zoom_in</span>
           </button>
-          <button class="action-button">
+          <button id="toggle-layout-button" class="action-button">
             <span class="material-icons-outlined">menu_book</span>
           </button>
         </div>
       </div>
-      <!-- <div class="toolbar secondary-toolbar">
-        <div id="search-form-field">
-          <span class="search-icon material-icons-outlined">search</span>
-          <input id="search-input" type="text" value="" />
-        </div>
-        <button class="action-button">
-          <span class="material-icons-outlined">keyboard_arrow_up</span>
-        </button>
-        <button class="action-button">
-          <span class="material-icons-outlined">keyboard_arrow_down</span>
-        </button>
-        <button class="action-button">
-          <span class="material-icons-outlined">settings</span>
-        </button>
-      </div> -->
-      <div class="toolbar secondary-toolbar">
+      <div id="search-toolbar" class="toolbar secondary-toolbar">
         <div id="search-form-field">
           <span class="search-icon material-icons-outlined">search</span>
           <input id="search-input" type="text" value="" />
@@ -83,21 +68,61 @@
           <span class="material-icons-outlined">settings</span>
         </button>
       </div>
-      <!-- <div class="toolbar secondary-toolbar">
-        <div id="search-form-field">
-          <span class="search-icon material-icons-outlined">search</span>
-          <input id="search-input" type="text" value="" />
+      <div id="zoom-toolbar" class="toolbar secondary-toolbar">
+        <button class="action-button">
+          <span class="material-icons-outlined">zoom_in</span>
+        </button>
+        <button class="action-button">
+          <span class="material-icons-outlined">zoom_out</span>
+        </button>
+        <div id="zoom-dropdown" class="dropdown">
+          <button class="dropdown-button">
+            <span class="dropdown-value">100%</span>
+            <span class="material-icons-outlined">arrow_drop_down</span>
+          </button>
+          <div class="dropdown-options">
+            <div class="dropdown-option" data-value="one-column">10%</div>
+            <div class="dropdown-option" data-value="one-column">15%</div>
+            <div class="dropdown-option" data-value="one-column">20%</div>
+            <div class="dropdown-option" data-value="one-column">25%</div>
+            <div class="dropdown-option" data-value="one-column">35%</div>
+            <div class="dropdown-option" data-value="one-column">40%</div>
+            <div class="dropdown-option" data-value="one-column">50%</div>
+            <div class="dropdown-option" data-value="one-column">65%</div>
+            <div class="dropdown-option" data-value="one-column">80%</div>
+            <div class="dropdown-option" data-value="one-column">80%</div>
+            <div class="dropdown-option" data-value="one-column">100%</div>
+            <div class="dropdown-option" data-value="one-column">125%</div>
+            <div class="dropdown-option" data-value="one-column">150%</div>
+            <div class="dropdown-option" data-value="one-column">200%</div>
+            <div class="dropdown-option" data-value="one-column">250%</div>
+            <div class="dropdown-option" data-value="one-column">300%</div>
+            <div class="dropdown-option" data-value="one-column">400%</div>
+          </div>
         </div>
+      </div>
+      <div id="layout-toolbar" class="toolbar secondary-toolbar">
         <button class="action-button">
-          <span class="material-icons-outlined">keyboard_arrow_up</span>
+          <span class="material-icons-outlined">fullscreen</span>
         </button>
         <button class="action-button">
-          <span class="material-icons-outlined">keyboard_arrow_down</span>
+          <span class="material-icons-outlined">rotate_right</span>
         </button>
-        <button class="action-button">
-          <span class="material-icons-outlined">settings</span>
-        </button>
-      </div> -->
+        <div id="layout-dropdown" class="dropdown">
+          <button class="dropdown-button">
+            <span class="dropdown-value">Two column right</span>
+            <span class="material-icons-outlined">arrow_drop_down</span>
+          </button>
+          <div class="dropdown-options">
+            <div class="dropdown-option" data-value="one-column">One column</div>
+            <div class="dropdown-option" data-value="single-page">Single page</div>
+            <div class="dropdown-option" data-value="two-column-left">Two column left</div>
+            <div class="dropdown-option" data-value="two-column-right">Two column right</div>
+            <div class="dropdown-option" data-value="two-page-left">Two page left</div>
+            <div class="dropdown-option" data-value="two-page-right">Two page right</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="pdfviewer" style="height: 100vh; width: 100vw"></div>
   </body>

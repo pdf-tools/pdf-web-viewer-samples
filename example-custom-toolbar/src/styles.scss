@@ -56,6 +56,7 @@ body {
 
         .pagination-info {
           padding: 0 10px;
+          user-select: none;
 
           #page-input {
             width: 36px;
@@ -91,7 +92,7 @@ body {
     display: none;
 
     #search-form-field {
-      margin-left: 6px;
+      margin: 0 6px;
       position: relative;
 
       .search-icon {
@@ -106,6 +107,14 @@ body {
         width: 120px;
         padding-left: 21.5px;
       }
+    }
+
+    #layout-dropdown {
+      min-width: 120px;
+    }
+
+    #zoom-dropdown {
+      min-width: 80px;
     }
   }
   
@@ -141,6 +150,7 @@ body {
 .dropdown {
   padding: 0 4px;
   position: relative;
+
   .dropdown-button {
     display: flex;
     justify-content: space-between;
@@ -167,7 +177,7 @@ body {
     }
   }
 
-  .dropdown-options {
+  .dropdown-options-container {
     position: absolute;
     display: none;
     background: $toolbar-background;
@@ -188,12 +198,4 @@ body {
       }
     }
   }
-}
-
-#layout-dropdown {
-  min-width: 120px;
-}
-
-#zoom-dropdown {
-  min-width: 80px;
 }

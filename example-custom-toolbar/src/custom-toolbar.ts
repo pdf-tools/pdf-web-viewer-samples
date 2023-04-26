@@ -1,61 +1,70 @@
-interface State {
-    layoutDropdownOpened: boolean;
-    layoutDropdownValue: string;
-    zoomDropdownOpened: boolean;
-    zoomDropdownValue: number;
-    searchToolbarOpened: boolean;
-    zoomToolbarOpened: boolean;
-    layoutToolbarOpened: boolean;
+interface CustomToolbarState {
+  informationPaneOpened: boolean;
+  layoutDropdownOpened: boolean;
+  layoutDropdownValue: string;
+  zoomDropdownOpened: boolean;
+  zoomDropdownValue: number;
+  searchToolbarOpened: boolean;
+  zoomToolbarOpened: boolean;
+  layoutToolbarOpened: boolean;
 }
   
-const initialState = {
-    layoutDropdownOpened: false,
-    layoutDropdownValue: 'one-column',
-    zoomDropdownOpened: false,
-    zoomDropdownValue: 100,
-    searchToolbarOpened: false,
-    zoomToolbarOpened: false,
-    layoutToolbarOpened: false,
+const initialState: CustomToolbarState = {
+  informationPaneOpened: false,
+  layoutDropdownOpened: false,
+  layoutDropdownValue: 'one-column',
+  zoomDropdownOpened: false,
+  zoomDropdownValue: 100,
+  searchToolbarOpened: false,
+  zoomToolbarOpened: false,
+  layoutToolbarOpened: false,
 };
 
-interface DOM {
-    uploadFileButton: HTMLButtonElement;
-    downloadFileButton: HTMLButtonElement;
-    toggleSidePaneButton: HTMLButtonElement;
-    prevPageButton: HTMLButtonElement;
-    nextPageButton: HTMLButtonElement;
-    toggleSearchToolbarButton: HTMLButtonElement;
-    toggleZoomToolbarButton: HTMLButtonElement;
-    toggleLayoutToolbarButton: HTMLButtonElement;
-    searchToolbar: HTMLDivElement;
-    prevSearchMatchButton: HTMLButtonElement;
-    nextSearchMatchButton: HTMLButtonElement;
-    zoomToolbar: HTMLDivElement;
-    zoomInButton: HTMLButtonElement;
-    zoomOutButton: HTMLButtonElement;
-    zoomDropdown: HTMLDivElement;
-    zoomDropdownButton: HTMLDivElement,
-    zoomDropdownOptionsContainer: HTMLDivElement,
-    zoomDropdownOptions: NodeListOf<HTMLDivElement>,
-    layoutToolbar: HTMLDivElement;
-    toggleFitButton: HTMLButtonElement;
-    rotatePageButton: HTMLButtonElement;
-    layoutDropdown: HTMLDivElement;
-    layoutDropdownButton: HTMLDivElement,
-    layoutDropdownOptionsContainer: HTMLDivElement,
-    layoutDropdownOptions: NodeListOf<HTMLDivElement>,
+interface CustomToolbarDOM {
+  uploadFileButton: HTMLButtonElement;
+  downloadFileButton: HTMLButtonElement;
+  toggleInformationPaneButton: HTMLButtonElement;
+  prevPageButton: HTMLButtonElement;
+  nextPageButton: HTMLButtonElement;
+  toggleSearchToolbarButton: HTMLButtonElement;
+  toggleZoomToolbarButton: HTMLButtonElement;
+  toggleLayoutToolbarButton: HTMLButtonElement;
+  searchToolbar: HTMLDivElement;
+  prevSearchMatchButton: HTMLButtonElement;
+  nextSearchMatchButton: HTMLButtonElement;
+  zoomToolbar: HTMLDivElement;
+  zoomInButton: HTMLButtonElement;
+  zoomOutButton: HTMLButtonElement;
+  zoomDropdown: HTMLDivElement;
+  zoomDropdownButton: HTMLDivElement,
+  zoomDropdownOptionsContainer: HTMLDivElement,
+  zoomDropdownOptions: NodeListOf<HTMLDivElement>,
+  layoutToolbar: HTMLDivElement;
+  toggleFitButton: HTMLButtonElement;
+  rotatePageButton: HTMLButtonElement;
+  layoutDropdown: HTMLDivElement;
+  layoutDropdownButton: HTMLDivElement,
+  layoutDropdownOptionsContainer: HTMLDivElement,
+  layoutDropdownOptions: NodeListOf<HTMLDivElement>,
+}
+
+interface CustomToolbarCallbacks {
+  onUploadFileButtonClicked?: () => void;
+  onDownloadFileButtonClicked?: () => void;
+  onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
 }
 
 export default class CustomToolbar {
-  private state: State;
-  private dom: DOM;
+  private state: CustomToolbarState;
+  private dom: CustomToolbarDOM;
+  private callbacks: CustomToolbarCallbacks;
 
-  constructor() {
+  constructor(callbacks?: CustomToolbarCallbacks) {
     this.state = { ...initialState };
     this.dom = {
       uploadFileButton: document.getElementById('upload-file-button') as HTMLButtonElement,
       downloadFileButton: document.getElementById('download-file-button') as HTMLButtonElement,
-      toggleSidePaneButton: document.getElementById('toggle-side-pane-button') as HTMLButtonElement,
+      toggleInformationPaneButton: document.getElementById('toggle-information-pane-button') as HTMLButtonElement,
       prevPageButton: document.getElementById('prev-page-button') as HTMLButtonElement,
       nextPageButton: document.getElementById('next-page-button') as HTMLButtonElement,
       toggleSearchToolbarButton: document.getElementById('toggle-search-toolbar-button') as HTMLButtonElement,
@@ -79,7 +88,9 @@ export default class CustomToolbar {
       layoutDropdownOptionsContainer: document.querySelector('#layout-dropdown .dropdown-options-container') as HTMLDivElement,
       layoutDropdownOptions: document.querySelectorAll('#layout-dropdown .dropdown-options-container .dropdown-option') as NodeListOf<HTMLDivElement>,
     };
+    this.callbacks = { ...callbacks };
 
+    this.handleToggleInformationPaneButtonClicked = this.handleToggleInformationPaneButtonClicked.bind(this);
     this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
     this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
     this.handleToggleLayoutToolbarButtonClicked = this.handleToggleLayoutToolbarButtonClicked.bind(this);
@@ -93,6 +104,7 @@ export default class CustomToolbar {
   }
 
   init() {
+    this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
     this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
@@ -100,6 +112,7 @@ export default class CustomToolbar {
   }
 
   destroy() {
+    this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
     this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
@@ -136,6 +149,12 @@ export default class CustomToolbar {
     });
   
     document.removeEventListener('click', this.handleDropdownOutsideClick);
+  }
+
+  private handleToggleInformationPaneButtonClicked() {
+    this.state.informationPaneOpened = !this.state.informationPaneOpened;
+    this.dom.toggleInformationPaneButton.classList.toggle('active', this.state.informationPaneOpened);
+    this.callbacks.onToggleInformationPaneButtonClicked?.(this.state.informationPaneOpened);
   }
 
   private handleToggleSearchToolbarButtonClicked() {

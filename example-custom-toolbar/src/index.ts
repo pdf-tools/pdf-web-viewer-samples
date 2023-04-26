@@ -21,4 +21,10 @@ pdfViewer.addEventListener('appLoaded', function () {
   pdfViewer.open({ uri: '/PdfWebViewer.pdf' })
 })
 
-const customToolbar = new CustomToolbar();
+const customToolbar = new CustomToolbar(
+  {
+    onToggleInformationPaneButtonClicked(visible: boolean) {
+      visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
+    },
+  }
+);

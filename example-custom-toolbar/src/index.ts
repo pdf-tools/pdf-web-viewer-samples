@@ -17,10 +17,6 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
 
 const pdfViewer = new PdfWebViewer(viewerElement, license, options)
 
-pdfViewer.addEventListener('appLoaded', function () {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' })
-})
-
 const customToolbar = new CustomToolbar(
   {
     onUploadFileButtonClicked() {
@@ -29,8 +25,24 @@ const customToolbar = new CustomToolbar(
     onDownloadFileButtonClicked() {
       pdfViewer.downloadFile();
     },
+    onPageNumberChanged(pageNumber: number) {
+      pdfViewer.setPageNumber(pageNumber);
+    },
     onToggleInformationPaneButtonClicked(visible: boolean) {
       visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
     },
   }
 );
+
+pdfViewer.addEventListener('appLoaded', function () {
+  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
+})
+
+pdfViewer.addEventListener('documentLoaded', function () {
+  customToolbar.setPageNumber(pdfViewer.getPageNumber());
+  customToolbar.setPageCount(pdfViewer.getPageCount());
+})
+
+pdfViewer.addEventListener('pageNumberChanged', function (pageNumber: number) {
+  customToolbar.setPageNumber(pageNumber);
+});

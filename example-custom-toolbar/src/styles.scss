@@ -58,7 +58,7 @@ body {
           padding: 0 10px;
           user-select: none;
 
-          #page-input {
+          #page-number-input {
             width: 36px;
 
             &::-webkit-outer-spin-button,
@@ -127,13 +127,17 @@ body {
     height: $button-size;
     user-select: none;
 
-    &:hover {
+    &:disabled {
+      opacity: .3;
+    }
+
+    &:hover:not(:disabled) {
       background: $primary-hover;
       color: $primary;
       cursor: pointer;
     }
 
-    &.active {
+    &.active:not(:disabled) {
       background: $primary-hover;
       color: $primary;
       cursor: pointer;

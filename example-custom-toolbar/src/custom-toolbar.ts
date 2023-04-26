@@ -1,5 +1,7 @@
 interface CustomToolbarState {
   informationPaneOpened: boolean;
+  pageNumber: number;
+  pageCount: number;
   layoutDropdownOpened: boolean;
   layoutDropdownValue: string;
   zoomDropdownOpened: boolean;
@@ -11,6 +13,8 @@ interface CustomToolbarState {
   
 const initialState: CustomToolbarState = {
   informationPaneOpened: false,
+  pageNumber: 1,
+  pageCount: 1,
   layoutDropdownOpened: false,
   layoutDropdownValue: 'one-column',
   zoomDropdownOpened: false,
@@ -24,6 +28,8 @@ interface CustomToolbarDOM {
   uploadFileButton: HTMLButtonElement;
   downloadFileButton: HTMLButtonElement;
   toggleInformationPaneButton: HTMLButtonElement;
+  pageNumberInput: HTMLInputElement;
+  pageCount: HTMLSpanElement;
   prevPageButton: HTMLButtonElement;
   nextPageButton: HTMLButtonElement;
   toggleSearchToolbarButton: HTMLButtonElement;
@@ -51,6 +57,7 @@ interface CustomToolbarDOM {
 interface CustomToolbarCallbacks {
   onUploadFileButtonClicked?: () => void;
   onDownloadFileButtonClicked?: () => void;
+  onPageNumberChanged?: (pageNumber: number) => void;
   onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
 }
 
@@ -65,6 +72,8 @@ export default class CustomToolbar {
       uploadFileButton: document.getElementById('upload-file-button') as HTMLButtonElement,
       downloadFileButton: document.getElementById('download-file-button') as HTMLButtonElement,
       toggleInformationPaneButton: document.getElementById('toggle-information-pane-button') as HTMLButtonElement,
+      pageNumberInput: document.getElementById('page-number-input') as HTMLInputElement,
+      pageCount: document.getElementById('page-count') as HTMLSpanElement,
       prevPageButton: document.getElementById('prev-page-button') as HTMLButtonElement,
       nextPageButton: document.getElementById('next-page-button') as HTMLButtonElement,
       toggleSearchToolbarButton: document.getElementById('toggle-search-toolbar-button') as HTMLButtonElement,
@@ -92,7 +101,9 @@ export default class CustomToolbar {
 
     this.handleUploadFileButtonClicked = this.handleUploadFileButtonClicked.bind(this);
     this.handleDownloadFileButtonClicked = this.handleDownloadFileButtonClicked.bind(this);
-    this.handleToggleInformationPaneButtonClicked = this.handleToggleInformationPaneButtonClicked.bind(this);
+    this.handlePageNumberInputChanged = this.handlePageNumberInputChanged.bind(this);
+    this.handlePrevPageButtonClicked = this.handlePrevPageButtonClicked.bind(this);
+    this.handleNextPageButtonClicked = this.handleNextPageButtonClicked.bind(this);
     this.handleToggleInformationPaneButtonClicked = this.handleToggleInformationPaneButtonClicked.bind(this);
     this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
     this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
@@ -106,24 +117,42 @@ export default class CustomToolbar {
     this.init();
   }
 
-  init() {
-    this.dom.uploadFileButton.addEventListener('click', this.handleUploadFileButtonClicked);
-    this.dom.downloadFileButton.addEventListener('click', this.handleDownloadFileButtonClicked);
-    this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
-    this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
-    this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
-    this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
-    this.initDropdowns();
-  }
-
   destroy() {
     this.dom.uploadFileButton.removeEventListener('click', this.handleUploadFileButtonClicked);
     this.dom.downloadFileButton.removeEventListener('click', this.handleDownloadFileButtonClicked);
+    this.dom.pageNumberInput.removeEventListener('change', this.handlePageNumberInputChanged);
+    this.dom.prevPageButton.removeEventListener('click', this.handlePrevPageButtonClicked);
+    this.dom.nextPageButton.removeEventListener('click', this.handleNextPageButtonClicked);
     this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
     this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
     this.destroyDropdowns();
+  }
+
+  setPageNumber(pageNumber: number) {
+    this.state.pageNumber = pageNumber;
+    this.dom.pageNumberInput.value = pageNumber.toString();
+    this.refreshPaginationButtons();
+  }
+
+  setPageCount(pageCount: number) {
+    this.state.pageCount = pageCount;
+    this.dom.pageCount.innerText = pageCount.toString();
+    this.refreshPaginationButtons();
+  }
+
+  private init() {
+    this.dom.uploadFileButton.addEventListener('click', this.handleUploadFileButtonClicked);
+    this.dom.downloadFileButton.addEventListener('click', this.handleDownloadFileButtonClicked);
+    this.dom.pageNumberInput.addEventListener('change', this.handlePageNumberInputChanged);
+    this.dom.prevPageButton.addEventListener('click', this.handlePrevPageButtonClicked);
+    this.dom.nextPageButton.addEventListener('click', this.handleNextPageButtonClicked);
+    this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
+    this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
+    this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
+    this.initDropdowns();
   }
 
   private initDropdowns() {
@@ -166,6 +195,31 @@ export default class CustomToolbar {
     this.callbacks.onDownloadFileButtonClicked?.();
   }
 
+  private handlePageNumberInputChanged() {
+    let pageNumber = Math.floor(this.dom.pageNumberInput.valueAsNumber);
+
+    if (isNaN(pageNumber) || pageNumber < 1) pageNumber = 1;
+    if (pageNumber > this.state.pageCount) pageNumber = this.state.pageCount;
+
+    this.state.pageNumber = pageNumber;
+    this.dom.pageNumberInput.value = pageNumber.toString();
+    this.callbacks.onPageNumberChanged?.(this.state.pageNumber);
+
+    this.refreshPaginationButtons();
+  }
+
+  private handlePrevPageButtonClicked() {
+    if (this.state.pageNumber <= 1) return;
+    this.state.pageNumber--;
+    this.callbacks.onPageNumberChanged?.(this.state.pageNumber);
+  }
+
+  private handleNextPageButtonClicked() {
+    if (this.state.pageNumber >= this.state.pageCount) return;
+    this.state.pageNumber++;
+    this.callbacks.onPageNumberChanged?.(this.state.pageNumber);
+  }
+
   private handleToggleInformationPaneButtonClicked() {
     this.state.informationPaneOpened = !this.state.informationPaneOpened;
     this.dom.toggleInformationPaneButton.classList.toggle('active', this.state.informationPaneOpened);
@@ -181,7 +235,7 @@ export default class CustomToolbar {
   
   private handleToggleZoomToolbarButtonClicked() {
     this.state.searchToolbarOpened = false;
-    this.state.zoomToolbarOpened = !this.state.zoomDropdownOpened;
+    this.state.zoomToolbarOpened = !this.state.zoomToolbarOpened;
     this.state.layoutToolbarOpened = false;
     this.refreshSecondaryToolbars();
   }
@@ -224,6 +278,11 @@ export default class CustomToolbar {
       this.state.layoutDropdownOpened = false;
       this.refreshDropdowns();
     }
+  }
+
+  private refreshPaginationButtons() {
+    this.dom.prevPageButton.disabled = this.state.pageNumber <= 1;
+    this.dom.nextPageButton.disabled = this.state.pageNumber >= this.state.pageCount;
   }
 
   private refreshSecondaryToolbars() {

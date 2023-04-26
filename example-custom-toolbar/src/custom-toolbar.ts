@@ -64,6 +64,7 @@ interface CustomToolbarCallbacks {
   onDownloadFileButtonClicked?: () => void;
   onPageNumberChanged?: (pageNumber: number) => void;
   onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
+  onZoomChanged?: (zoom: number) => void;
   onFitModeChanged?: (fitMode: PdfFitMode) => void;
   onRotateViewerButtonClicked?: () => void;
   onLayoutModeChanged?: (layoutMode: PdfPageLayoutMode) => void;
@@ -73,6 +74,8 @@ export default class CustomToolbar {
   private state: CustomToolbarState;
   private dom: CustomToolbarDOM;
   private callbacks: CustomToolbarCallbacks;
+
+  private readonly ZOOM_OPTIONS = [ 10, 15, 20, 25, 35, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 400 ];
 
   constructor(callbacks?: CustomToolbarCallbacks) {
     this.state = { ...initialState };
@@ -118,6 +121,8 @@ export default class CustomToolbar {
     this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
     this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
     this.handleToggleLayoutToolbarButtonClicked = this.handleToggleLayoutToolbarButtonClicked.bind(this);
+    this.handleZoomInButtonClicked = this.handleZoomInButtonClicked.bind(this);
+    this.handleZoomOutButtonClicked = this.handleZoomOutButtonClicked.bind(this);
     this.handleZoomDropdownButtonClicked = this.handleZoomDropdownButtonClicked.bind(this);
     this.handleZoomDropdownOptionClicked = this.handleZoomDropdownOptionClicked.bind(this);
     this.handleToggleFitButtonClicked = this.handleToggleFitButtonClicked.bind(this);
@@ -139,6 +144,8 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.zoomInButton.removeEventListener('click', this.handleZoomInButtonClicked);
+    this.dom.zoomOutButton.removeEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.removeEventListener('click', this.handleToggleFitButtonClicked);
     this.dom.rotateViewerButton.removeEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
@@ -157,6 +164,20 @@ export default class CustomToolbar {
     this.refreshPaginationButtons();
   }
 
+  setFitMode(fitMode: PdfFitMode) {
+    this.state.fitMode = fitMode;
+    this.refreshFitModeIcon();
+  }
+
+  setZoom(zoom: number) {
+    this.state.zoomDropdownValue = zoom;
+
+    const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
+    dropdownValue.innerText = `${zoom}%`;
+
+    this.refreshZoomButtons();
+  }
+
   private init() {
     this.dom.uploadFileButton.addEventListener('click', this.handleUploadFileButtonClicked);
     this.dom.uploadFileInput.addEventListener('change', this.handleUploadFileInputChanged);
@@ -167,6 +188,8 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.zoomInButton.addEventListener('click', this.handleZoomInButtonClicked);
+    this.dom.zoomOutButton.addEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.addEventListener('click', this.handleToggleFitButtonClicked);
     this.dom.rotateViewerButton.addEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
@@ -275,24 +298,56 @@ export default class CustomToolbar {
     this.refreshSecondaryToolbars();
   }
 
+  private handleZoomInButtonClicked() {
+    let zoomIndex = 0;
+    while (this.state.zoomDropdownValue >= this.ZOOM_OPTIONS[zoomIndex]) zoomIndex++;
+    this.state.zoomDropdownValue = this.ZOOM_OPTIONS[zoomIndex];
+
+    this.callbacks.onZoomChanged?.(this.state.zoomDropdownValue);
+
+    const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
+    dropdownValue.innerText = `${this.state.zoomDropdownValue}%`;
+
+    this.refreshZoomButtons();
+  }
+
+  private handleZoomOutButtonClicked() {
+    let zoomIndex = this.ZOOM_OPTIONS.length - 1;
+    while (this.state.zoomDropdownValue <= this.ZOOM_OPTIONS[zoomIndex]) zoomIndex--;
+    this.state.zoomDropdownValue = this.ZOOM_OPTIONS[zoomIndex];
+
+    this.callbacks.onZoomChanged?.(this.state.zoomDropdownValue);
+
+    const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
+    dropdownValue.innerText = `${this.state.zoomDropdownValue}%`;
+
+    this.refreshZoomButtons();
+  }
+
   private handleZoomDropdownButtonClicked() {
     this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
     this.refreshDropdowns();
   }
 
-  private handleZoomDropdownOptionClicked() {
+  private handleZoomDropdownOptionClicked(event: PointerEvent) {
+    const dropdownOption = event.target as HTMLDivElement;
+    this.state.zoomDropdownValue = Number(dropdownOption.dataset.value);
     this.state.zoomDropdownOpened = !this.state.zoomDropdownOpened;
-    // setState
+
+    this.callbacks.onZoomChanged?.(this.state.zoomDropdownValue);
+
+    const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
+    dropdownValue.innerText = dropdownOption.innerText;
+
+    this.refreshZoomButtons();
     this.refreshDropdowns();
   }
 
   private handleToggleFitButtonClicked() {
-    this.state.fitMode = (this.state.fitMode + 1) % 3;
-    const icon = this.dom.toggleFitButton.querySelector('span[class^="material-icons"]') as HTMLSpanElement;
     switch (this.state.fitMode) {
-      case PdfFitMode.NONE: icon.innerText = 'fullscreen'; break;
-      case PdfFitMode.FIT_WIDTH: icon.innerText = 'fit_screen'; break;
-      case PdfFitMode.FIT_PAGE: icon.innerText = 'zoom_out_map'; break;
+      case PdfFitMode.NONE: this.state.fitMode = PdfFitMode.FIT_PAGE; break;
+      case PdfFitMode.FIT_WIDTH: this.state.fitMode = PdfFitMode.NONE; break;
+      case PdfFitMode.FIT_PAGE: this.state.fitMode = PdfFitMode.FIT_WIDTH; break;
     }
     this.callbacks.onFitModeChanged?.(this.state.fitMode);
   }
@@ -330,9 +385,25 @@ export default class CustomToolbar {
     }
   }
 
+  private refreshZoomButtons() {
+    let zoomIndex = 0;
+    while (this.state.zoomDropdownValue > this.ZOOM_OPTIONS[zoomIndex]) zoomIndex++;
+    this.dom.zoomInButton.disabled = zoomIndex >= this.ZOOM_OPTIONS.length - 1;
+    this.dom.zoomOutButton.disabled = zoomIndex <= 0;
+  }
+
   private refreshPaginationButtons() {
     this.dom.prevPageButton.disabled = this.state.pageNumber <= 1;
     this.dom.nextPageButton.disabled = this.state.pageNumber >= this.state.pageCount;
+  }
+  
+  private refreshFitModeIcon() {
+    const icon = this.dom.toggleFitButton.querySelector('span[class^="material-icons"]') as HTMLSpanElement;
+    switch (this.state.fitMode) {
+      case PdfFitMode.NONE: icon.innerText = 'fullscreen'; break;
+      case PdfFitMode.FIT_WIDTH: icon.innerText = 'fit_screen'; break;
+      case PdfFitMode.FIT_PAGE: icon.innerText = 'zoom_out_map'; break;
+    }
   }
 
   private refreshSecondaryToolbars() {

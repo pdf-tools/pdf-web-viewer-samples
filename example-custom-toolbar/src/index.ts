@@ -17,8 +17,6 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
 
 const pdfViewer = new PdfWebViewer(viewerElement, license, options)
 
-console.log(pdfViewer);
-
 const customToolbar = new CustomToolbar(
   {
     onUploadFile(file: File) {
@@ -33,17 +31,19 @@ const customToolbar = new CustomToolbar(
     onToggleInformationPaneButtonClicked(visible: boolean) {
       visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
     },
+    onZoomChanged(zoom: number) {
+      pdfViewer.setZoom(zoom / 100);
+    },
     onRotateViewerButtonClicked() {
       pdfViewer.setRotation((pdfViewer.getRotation() + 90) % 360);
     },
     onFitModeChanged(fitMode: PdfFitMode) {
-      console.log(pdfViewer.getFitMode());
       pdfViewer.setFitMode(fitMode);
     },
     onLayoutModeChanged(layoutMode: PdfPageLayoutMode) {
       pdfViewer.setPageLayoutMode(layoutMode);
     },
-  }
+  },
 );
 
 pdfViewer.addEventListener('appLoaded', function () {
@@ -57,4 +57,12 @@ pdfViewer.addEventListener('documentLoaded', function () {
 
 pdfViewer.addEventListener('pageNumberChanged', function (pageNumber: number) {
   customToolbar.setPageNumber(pageNumber);
+});
+
+pdfViewer.addEventListener('fitModeChanged', function (fitMode: PdfFitMode) {
+  customToolbar.setFitMode(fitMode);
+});
+
+pdfViewer.addEventListener('zoomChanged', function (zoom: number) {
+  customToolbar.setZoom(Math.floor(zoom * 100));
 });

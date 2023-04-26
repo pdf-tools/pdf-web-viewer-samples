@@ -19,8 +19,8 @@ const pdfViewer = new PdfWebViewer(viewerElement, license, options)
 
 const customToolbar = new CustomToolbar(
   {
-    onUploadFileButtonClicked() {
-      // TODO
+    onUploadFile(file: File) {
+      pdfViewer.open({ data: file });
     },
     onDownloadFileButtonClicked() {
       pdfViewer.downloadFile();

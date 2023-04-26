@@ -26,6 +26,7 @@ const initialState: CustomToolbarState = {
 
 interface CustomToolbarDOM {
   uploadFileButton: HTMLButtonElement;
+  uploadFileInput: HTMLInputElement;
   downloadFileButton: HTMLButtonElement;
   toggleInformationPaneButton: HTMLButtonElement;
   pageNumberInput: HTMLInputElement;
@@ -55,7 +56,7 @@ interface CustomToolbarDOM {
 }
 
 interface CustomToolbarCallbacks {
-  onUploadFileButtonClicked?: () => void;
+  onUploadFile?: (file: File) => void;
   onDownloadFileButtonClicked?: () => void;
   onPageNumberChanged?: (pageNumber: number) => void;
   onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
@@ -70,6 +71,7 @@ export default class CustomToolbar {
     this.state = { ...initialState };
     this.dom = {
       uploadFileButton: document.getElementById('upload-file-button') as HTMLButtonElement,
+      uploadFileInput: document.getElementById('upload-file-input') as HTMLInputElement,
       downloadFileButton: document.getElementById('download-file-button') as HTMLButtonElement,
       toggleInformationPaneButton: document.getElementById('toggle-information-pane-button') as HTMLButtonElement,
       pageNumberInput: document.getElementById('page-number-input') as HTMLInputElement,
@@ -100,6 +102,7 @@ export default class CustomToolbar {
     this.callbacks = { ...callbacks };
 
     this.handleUploadFileButtonClicked = this.handleUploadFileButtonClicked.bind(this);
+    this.handleUploadFileInputChanged = this.handleUploadFileInputChanged.bind(this);
     this.handleDownloadFileButtonClicked = this.handleDownloadFileButtonClicked.bind(this);
     this.handlePageNumberInputChanged = this.handlePageNumberInputChanged.bind(this);
     this.handlePrevPageButtonClicked = this.handlePrevPageButtonClicked.bind(this);
@@ -119,7 +122,8 @@ export default class CustomToolbar {
 
   destroy() {
     this.dom.uploadFileButton.removeEventListener('click', this.handleUploadFileButtonClicked);
-    this.dom.downloadFileButton.removeEventListener('click', this.handleDownloadFileButtonClicked);
+    this.dom.uploadFileInput.removeEventListener('change', this.handleUploadFileInputChanged);
+    this.dom.uploadFileButton.removeEventListener('click', this.handleUploadFileButtonClicked);
     this.dom.pageNumberInput.removeEventListener('change', this.handlePageNumberInputChanged);
     this.dom.prevPageButton.removeEventListener('click', this.handlePrevPageButtonClicked);
     this.dom.nextPageButton.removeEventListener('click', this.handleNextPageButtonClicked);
@@ -144,6 +148,7 @@ export default class CustomToolbar {
 
   private init() {
     this.dom.uploadFileButton.addEventListener('click', this.handleUploadFileButtonClicked);
+    this.dom.uploadFileInput.addEventListener('change', this.handleUploadFileInputChanged);
     this.dom.downloadFileButton.addEventListener('click', this.handleDownloadFileButtonClicked);
     this.dom.pageNumberInput.addEventListener('change', this.handlePageNumberInputChanged);
     this.dom.prevPageButton.addEventListener('click', this.handlePrevPageButtonClicked);
@@ -188,7 +193,17 @@ export default class CustomToolbar {
   }
 
   private handleUploadFileButtonClicked() {
-    this.callbacks.onUploadFileButtonClicked?.();
+    this.dom.uploadFileInput.click();
+  }
+
+  private handleUploadFileInputChanged() {
+    const file = this.dom.uploadFileInput.files[0];
+
+    if (file.type !== 'application/pdf') return;
+
+    this.callbacks.onUploadFile(file);
+
+    this.dom.uploadFileInput.value = null;
   }
 
   private handleDownloadFileButtonClicked() {

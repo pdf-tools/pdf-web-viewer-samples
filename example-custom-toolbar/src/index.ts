@@ -23,6 +23,12 @@ pdfViewer.addEventListener('appLoaded', function () {
 
 const customToolbar = new CustomToolbar(
   {
+    onUploadFileButtonClicked() {
+      // TODO
+    },
+    onDownloadFileButtonClicked() {
+      pdfViewer.downloadFile();
+    },
     onToggleInformationPaneButtonClicked(visible: boolean) {
       visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
     },

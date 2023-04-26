@@ -90,6 +90,9 @@ export default class CustomToolbar {
     };
     this.callbacks = { ...callbacks };
 
+    this.handleUploadFileButtonClicked = this.handleUploadFileButtonClicked.bind(this);
+    this.handleDownloadFileButtonClicked = this.handleDownloadFileButtonClicked.bind(this);
+    this.handleToggleInformationPaneButtonClicked = this.handleToggleInformationPaneButtonClicked.bind(this);
     this.handleToggleInformationPaneButtonClicked = this.handleToggleInformationPaneButtonClicked.bind(this);
     this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
     this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
@@ -104,6 +107,8 @@ export default class CustomToolbar {
   }
 
   init() {
+    this.dom.uploadFileButton.addEventListener('click', this.handleUploadFileButtonClicked);
+    this.dom.downloadFileButton.addEventListener('click', this.handleDownloadFileButtonClicked);
     this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
@@ -112,6 +117,8 @@ export default class CustomToolbar {
   }
 
   destroy() {
+    this.dom.uploadFileButton.removeEventListener('click', this.handleUploadFileButtonClicked);
+    this.dom.downloadFileButton.removeEventListener('click', this.handleDownloadFileButtonClicked);
     this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
@@ -149,6 +156,14 @@ export default class CustomToolbar {
     });
   
     document.removeEventListener('click', this.handleDropdownOutsideClick);
+  }
+
+  private handleUploadFileButtonClicked() {
+    this.callbacks.onUploadFileButtonClicked?.();
+  }
+
+  private handleDownloadFileButtonClicked() {
+    this.callbacks.onDownloadFileButtonClicked?.();
   }
 
   private handleToggleInformationPaneButtonClicked() {

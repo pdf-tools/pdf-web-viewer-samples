@@ -1,4 +1,4 @@
-import { PdfWebViewer, PdfWebViewerOptionsInterface } from '@pdf-tools/four-heights-pdf-web-viewer'
+import { PdfFitMode, PdfPageLayoutMode, PdfWebViewer, PdfWebViewerOptionsInterface } from '@pdf-tools/four-heights-pdf-web-viewer'
 import 'material-icons/iconfont/material-icons.css';
 import './styles.scss'
 import CustomToolbar from './custom-toolbar';
@@ -17,6 +17,8 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
 
 const pdfViewer = new PdfWebViewer(viewerElement, license, options)
 
+console.log(pdfViewer);
+
 const customToolbar = new CustomToolbar(
   {
     onUploadFile(file: File) {
@@ -30,6 +32,16 @@ const customToolbar = new CustomToolbar(
     },
     onToggleInformationPaneButtonClicked(visible: boolean) {
       visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
+    },
+    onRotateViewerButtonClicked() {
+      pdfViewer.setRotation((pdfViewer.getRotation() + 90) % 360);
+    },
+    onFitModeChanged(fitMode: PdfFitMode) {
+      console.log(pdfViewer.getFitMode());
+      pdfViewer.setFitMode(fitMode);
+    },
+    onLayoutModeChanged(layoutMode: PdfPageLayoutMode) {
+      pdfViewer.setPageLayoutMode(layoutMode);
     },
   }
 );

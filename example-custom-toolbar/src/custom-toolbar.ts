@@ -1,9 +1,12 @@
+import { PdfFitMode, PdfPageLayoutMode } from "@pdf-tools/four-heights-pdf-web-viewer";
+
 interface CustomToolbarState {
   informationPaneOpened: boolean;
   pageNumber: number;
   pageCount: number;
+  fitMode: PdfFitMode;
   layoutDropdownOpened: boolean;
-  layoutDropdownValue: string;
+  layoutDropdownValue: PdfPageLayoutMode;
   zoomDropdownOpened: boolean;
   zoomDropdownValue: number;
   searchToolbarOpened: boolean;
@@ -16,7 +19,8 @@ const initialState: CustomToolbarState = {
   pageNumber: 1,
   pageCount: 1,
   layoutDropdownOpened: false,
-  layoutDropdownValue: 'one-column',
+  fitMode: PdfFitMode.NONE,
+  layoutDropdownValue: PdfPageLayoutMode.ONE_COLUMN,
   zoomDropdownOpened: false,
   zoomDropdownValue: 100,
   searchToolbarOpened: false,
@@ -48,7 +52,7 @@ interface CustomToolbarDOM {
   zoomDropdownOptions: NodeListOf<HTMLDivElement>,
   layoutToolbar: HTMLDivElement;
   toggleFitButton: HTMLButtonElement;
-  rotatePageButton: HTMLButtonElement;
+  rotateViewerButton: HTMLButtonElement;
   layoutDropdown: HTMLDivElement;
   layoutDropdownButton: HTMLDivElement,
   layoutDropdownOptionsContainer: HTMLDivElement,
@@ -60,6 +64,9 @@ interface CustomToolbarCallbacks {
   onDownloadFileButtonClicked?: () => void;
   onPageNumberChanged?: (pageNumber: number) => void;
   onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
+  onFitModeChanged?: (fitMode: PdfFitMode) => void;
+  onRotateViewerButtonClicked?: () => void;
+  onLayoutModeChanged?: (layoutMode: PdfPageLayoutMode) => void;
 }
 
 export default class CustomToolbar {
@@ -93,7 +100,7 @@ export default class CustomToolbar {
       zoomDropdownOptions: document.querySelectorAll('#zoom-dropdown .dropdown-options-container .dropdown-option') as NodeListOf<HTMLDivElement>,
       layoutToolbar: document.getElementById('layout-toolbar') as HTMLDivElement,
       toggleFitButton: document.getElementById('toggle-fit-button') as HTMLButtonElement,
-      rotatePageButton: document.getElementById('rotate-page-button') as HTMLButtonElement,
+      rotateViewerButton: document.getElementById('rotate-viewer-button') as HTMLButtonElement,
       layoutDropdown: document.getElementById('layout-dropdown') as HTMLDivElement,
       layoutDropdownButton: document.querySelector('#layout-dropdown .dropdown-button') as HTMLDivElement,
       layoutDropdownOptionsContainer: document.querySelector('#layout-dropdown .dropdown-options-container') as HTMLDivElement,
@@ -113,6 +120,8 @@ export default class CustomToolbar {
     this.handleToggleLayoutToolbarButtonClicked = this.handleToggleLayoutToolbarButtonClicked.bind(this);
     this.handleZoomDropdownButtonClicked = this.handleZoomDropdownButtonClicked.bind(this);
     this.handleZoomDropdownOptionClicked = this.handleZoomDropdownOptionClicked.bind(this);
+    this.handleToggleFitButtonClicked = this.handleToggleFitButtonClicked.bind(this);
+    this.handleRotateViewerButtonClicked = this.handleRotateViewerButtonClicked.bind(this);
     this.handleLayoutDropdownButtonClicked = this.handleLayoutDropdownButtonClicked.bind(this);
     this.handleLayoutDropdownOptionClicked = this.handleLayoutDropdownOptionClicked.bind(this);
     this.handleDropdownOutsideClick = this.handleDropdownOutsideClick.bind(this);
@@ -130,6 +139,8 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.toggleFitButton.removeEventListener('click', this.handleToggleFitButtonClicked);
+    this.dom.rotateViewerButton.removeEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
     this.destroyDropdowns();
   }
@@ -156,6 +167,8 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.toggleFitButton.addEventListener('click', this.handleToggleFitButtonClicked);
+    this.dom.rotateViewerButton.addEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
     this.initDropdowns();
   }
@@ -273,14 +286,36 @@ export default class CustomToolbar {
     this.refreshDropdowns();
   }
 
+  private handleToggleFitButtonClicked() {
+    this.state.fitMode = (this.state.fitMode + 1) % 3;
+    const icon = this.dom.toggleFitButton.querySelector('span[class^="material-icons"]') as HTMLSpanElement;
+    switch (this.state.fitMode) {
+      case PdfFitMode.NONE: icon.innerText = 'fullscreen'; break;
+      case PdfFitMode.FIT_WIDTH: icon.innerText = 'fit_screen'; break;
+      case PdfFitMode.FIT_PAGE: icon.innerText = 'zoom_out_map'; break;
+    }
+    this.callbacks.onFitModeChanged?.(this.state.fitMode);
+  }
+
+  private handleRotateViewerButtonClicked() {
+    this.callbacks.onRotateViewerButtonClicked?.();
+  }
+
   private handleLayoutDropdownButtonClicked() {
     this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
     this.refreshDropdowns();
   }
 
-  private handleLayoutDropdownOptionClicked() {
+  private handleLayoutDropdownOptionClicked(event: PointerEvent) {
+    const dropdownOption = event.target as HTMLDivElement;
+    this.state.layoutDropdownValue = Number(dropdownOption.dataset.value) as PdfPageLayoutMode;
     this.state.layoutDropdownOpened = !this.state.layoutDropdownOpened;
-    // setState
+
+    this.callbacks.onLayoutModeChanged?.(this.state.layoutDropdownValue);
+
+    const dropdownValue = this.dom.layoutDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
+    dropdownValue.innerText = dropdownOption.innerText;
+
     this.refreshDropdowns();
   }
 

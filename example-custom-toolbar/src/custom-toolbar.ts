@@ -504,9 +504,9 @@ export default class CustomToolbar {
     this.dom.toggleZoomToolbarButton.classList.toggle('active', this.state.zoomToolbarOpened);
     this.dom.toggleLayoutToolbarButton.classList.toggle('active', this.state.layoutToolbarOpened);
 
-    this.dom.zoomToolbar.style.top = this.state.zoomToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
-    this.dom.layoutToolbar.style.top = this.state.layoutToolbarOpened ? `${this.dom.layoutToolbar.parentElement.clientHeight}px` : '0px';
-    this.dom.searchToolbar.style.top = this.state.searchToolbarOpened ? `${this.dom.searchToolbar.parentElement.clientHeight}px` : '0px';
+    this.dom.zoomToolbar.style.top = this.state.zoomToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : null;
+    this.dom.layoutToolbar.style.top = this.state.layoutToolbarOpened ? `${this.dom.layoutToolbar.parentElement.clientHeight}px` : null;
+    this.dom.searchToolbar.style.top = this.state.searchToolbarOpened ? `${this.dom.searchToolbar.parentElement.clientHeight}px` : null;
   }
   
   private refreshDropdowns() {

@@ -28,7 +28,6 @@ body {
 
 .toolbar {
   background: $toolbar-background;
-  padding: 0 10px;
 }
 
 #custom-toolbar {
@@ -96,13 +95,11 @@ body {
     }
     right: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     transition: all 0.3s ease;
     z-index: 2;
-    border-bottom-left-radius: $default-border-radius;
-    border-bottom-right-radius: $default-border-radius;
 
     #search-form-field {
       margin: 0 6px;
@@ -117,8 +114,19 @@ body {
       }
 
       #search-input {
-        width: 120px;
+        width: 140px;
         padding-left: 25px;
+      }
+    }
+
+    #search-options {
+      display: flex;
+      gap: 5px;
+      padding: 0 5px;
+      label {
+        @media screen and (min-width:640px) {
+          max-width: 60px;
+        }
       }
     }
 
@@ -130,45 +138,45 @@ body {
       min-width: 80px;
     }
   }
+}
+
   
-  .action-button {
-    border: none;
-    transition: all 0.3s ease;
-    color: $default;
-    background: transparent;
-    width: $button-size;
-    height: $button-size;
-    user-select: none;
-    border-radius: $default-border-radius;
+.action-button {
+  border: none;
+  transition: all 0.3s ease;
+  color: $default;
+  background: transparent;
+  width: $button-size;
+  height: $button-size;
+  user-select: none;
 
-    &:disabled {
-      opacity: .3;
-    }
-
-    &:hover:not(:disabled) {
-      background: $primary-hover;
-      color: $primary;
-      cursor: pointer;
-    }
-
-    &.active:not(:disabled) {
-      background: $primary-hover;
-      color: $primary;
-      cursor: pointer;
-    }
+  &:disabled {
+    opacity: .3;
   }
 
-  input {
-    height: 30px;
-    text-align: center;
-    border-radius: $default-border-radius;
-    background: $input-background;
-    border: $default-input-border;
-    border-radius: $default-border-radius;
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+    color: $primary;
+    cursor: pointer;
+  }
 
-    &:focus {
-      background: $input-background-focused;
-    }
+  &.active:not(:disabled) {
+    background: $primary-hover;
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+input {
+  height: 30px;
+  text-align: center;
+  border-radius: $default-border-radius;
+  background: $input-background;
+  border: $default-input-border;
+  border-radius: $default-border-radius;
+
+  &:focus {
+    background: $input-background-focused;
   }
 }
 
@@ -222,5 +230,25 @@ body {
         cursor: pointer;
       }
     }
+  }
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  
+  font-size: 12px;
+  user-select: none;
+
+  input, label {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  label {
+    text-align: center;
   }
 }

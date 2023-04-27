@@ -4,6 +4,10 @@ interface CustomToolbarState {
   informationPaneOpened: boolean;
   pageNumber: number;
   pageCount: number;
+  searchOptionsOpened: boolean;
+  isSearchCaseSensitive: boolean;
+  isSearchWrappingEnabled: boolean;
+  isSearchRegex: boolean;
   fitMode: PdfFitMode;
   layoutDropdownOpened: boolean;
   layoutDropdownValue: PdfPageLayoutMode;
@@ -18,6 +22,10 @@ const initialState: CustomToolbarState = {
   informationPaneOpened: false,
   pageNumber: 1,
   pageCount: 1,
+  searchOptionsOpened: false,
+  isSearchCaseSensitive: false,
+  isSearchWrappingEnabled: false,
+  isSearchRegex: false,
   layoutDropdownOpened: false,
   fitMode: PdfFitMode.NONE,
   layoutDropdownValue: PdfPageLayoutMode.ONE_COLUMN,
@@ -44,6 +52,10 @@ interface CustomToolbarDOM {
   searchInput: HTMLInputElement;
   prevSearchMatchButton: HTMLButtonElement;
   nextSearchMatchButton: HTMLButtonElement;
+  searchOptionsContainer: HTMLDivElement;
+  caseSensitiveSearchCheckbox: HTMLInputElement;
+  wrapSearchCheckbox: HTMLInputElement;
+  regularExpressionSearchCheckbox: HTMLInputElement;
   zoomToolbar: HTMLDivElement;
   zoomInButton: HTMLButtonElement;
   zoomOutButton: HTMLButtonElement;
@@ -100,6 +112,10 @@ export default class CustomToolbar {
       searchInput: document.getElementById('search-input') as HTMLInputElement,
       prevSearchMatchButton: document.getElementById('prev-search-match-button') as HTMLButtonElement,
       nextSearchMatchButton: document.getElementById('next-search-match-button') as HTMLButtonElement,
+      searchOptionsContainer: document.getElementById('search-options') as HTMLDivElement,
+      caseSensitiveSearchCheckbox: document.getElementById('case-sensitive-search-checkbox') as HTMLInputElement,
+      wrapSearchCheckbox: document.getElementById('wrap-search-checkbox') as HTMLInputElement,
+      regularExpressionSearchCheckbox: document.getElementById('regular-expression-search-checkbox') as HTMLInputElement,
       zoomToolbar: document.getElementById('zoom-toolbar') as HTMLDivElement,
       zoomInButton: document.getElementById('zoom-in-button') as HTMLButtonElement,
       zoomOutButton: document.getElementById('zoom-out-button') as HTMLButtonElement,
@@ -131,6 +147,9 @@ export default class CustomToolbar {
     this.handleSearchInputKeypress = this.handleSearchInputKeypress.bind(this);
     this.handlePrevSearchMatchClicked = this.handlePrevSearchMatchClicked.bind(this);
     this.handleNextSearchMatchClicked = this.handleNextSearchMatchClicked.bind(this);
+    this.handleCaseSensitiveSearchCheckboxClicked = this.handleCaseSensitiveSearchCheckboxClicked.bind(this);
+    this.handleWrapSearchCheckboxClicked = this.handleWrapSearchCheckboxClicked.bind(this);
+    this.handleRegularExpressionSearchCheckboxClicked = this.handleRegularExpressionSearchCheckboxClicked.bind(this);
     this.handleZoomInButtonClicked = this.handleZoomInButtonClicked.bind(this);
     this.handleZoomOutButtonClicked = this.handleZoomOutButtonClicked.bind(this);
     this.handleZoomDropdownButtonClicked = this.handleZoomDropdownButtonClicked.bind(this);
@@ -159,6 +178,9 @@ export default class CustomToolbar {
     this.dom.searchInput.removeEventListener('keypress', this.handleSearchInputKeypress);
     this.dom.prevSearchMatchButton.removeEventListener('click', this.handlePrevSearchMatchClicked);
     this.dom.nextSearchMatchButton.removeEventListener('click', this.handleNextSearchMatchClicked);
+    this.dom.caseSensitiveSearchCheckbox.removeEventListener('change', this.handleCaseSensitiveSearchCheckboxClicked);
+    this.dom.wrapSearchCheckbox.removeEventListener('change', this.handleWrapSearchCheckboxClicked);
+    this.dom.regularExpressionSearchCheckbox.removeEventListener('change', this.handleRegularExpressionSearchCheckboxClicked);
     this.dom.zoomInButton.removeEventListener('click', this.handleZoomInButtonClicked);
     this.dom.zoomOutButton.removeEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.removeEventListener('click', this.handleToggleFitButtonClicked);
@@ -208,6 +230,9 @@ export default class CustomToolbar {
     this.dom.searchInput.addEventListener('keypress', this.handleSearchInputKeypress);
     this.dom.prevSearchMatchButton.addEventListener('click', this.handlePrevSearchMatchClicked);
     this.dom.nextSearchMatchButton.addEventListener('click', this.handleNextSearchMatchClicked);
+    this.dom.caseSensitiveSearchCheckbox.addEventListener('change', this.handleCaseSensitiveSearchCheckboxClicked);
+    this.dom.wrapSearchCheckbox.addEventListener('change', this.handleWrapSearchCheckboxClicked);
+    this.dom.regularExpressionSearchCheckbox.addEventListener('change', this.handleRegularExpressionSearchCheckboxClicked);
     this.dom.zoomInButton.addEventListener('click', this.handleZoomInButtonClicked);
     this.dom.zoomOutButton.addEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.addEventListener('click', this.handleToggleFitButtonClicked);
@@ -326,9 +351,9 @@ export default class CustomToolbar {
       this.dom.searchInput.value,
       { 
         startPage: 1, 
-        isCaseSensitive: false,
-        isWrappingEnabled: false,
-        isRegex: false,
+        isCaseSensitive: this.state.isSearchCaseSensitive,
+        isWrappingEnabled: this.state.isSearchWrappingEnabled,
+        isRegex: this.state.isSearchRegex,
       },
     );
   }
@@ -345,6 +370,21 @@ export default class CustomToolbar {
 
   private handleNextSearchMatchClicked() {
     this.callbacks.onNextSearchButtonClicked?.();
+  }
+
+  private handleCaseSensitiveSearchCheckboxClicked() {
+    this.state.isSearchCaseSensitive = this.dom.caseSensitiveSearchCheckbox.checked;
+    this.handleSearchInputInput();
+  }
+
+  private handleWrapSearchCheckboxClicked() {
+    this.state.isSearchWrappingEnabled = this.dom.wrapSearchCheckbox.checked;
+    this.handleSearchInputInput();
+  }
+
+  private handleRegularExpressionSearchCheckboxClicked() {
+    this.state.isSearchRegex = this.dom.regularExpressionSearchCheckbox.checked;
+    this.handleSearchInputInput();
   }
 
   private handleZoomInButtonClicked() {

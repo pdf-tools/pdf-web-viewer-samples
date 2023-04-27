@@ -65,9 +65,20 @@
         <button id="next-search-match-button" class="action-button">
           <span class="material-icons-outlined">keyboard_arrow_down</span>
         </button>
-        <button class="action-button">
-          <span class="material-icons-outlined">settings</span>
-        </button>
+        <div id="search-options">
+          <div class="checkbox">
+            <input type="checkbox" id="case-sensitive-search-checkbox" name="case-sensitive-search-checkbox">
+            <label for="case-sensitive-search-checkbox">Case sensitive</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="wrap-search-checkbox" name="wrap-search-checkbox">
+            <label for="wrap-search-checkbox">Wrap search</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="regular-expression-search-checkbox" name="regular-expression-search-checkbox">
+            <label for="regular-expression-search-checkbox">Regular expression</label>
+          </div>
+        </div>
       </div>
       <div id="zoom-toolbar" class="toolbar secondary-toolbar">
         <button id="zoom-in-button" class="action-button">

@@ -1,4 +1,4 @@
-import { PdfFitMode, PdfPageLayoutMode } from "@pdf-tools/four-heights-pdf-web-viewer";
+import { PdfFitMode, PdfPageLayoutMode, SearchOptions } from "@pdf-tools/four-heights-pdf-web-viewer";
 
 interface CustomToolbarState {
   informationPaneOpened: boolean;
@@ -41,6 +41,7 @@ interface CustomToolbarDOM {
   toggleZoomToolbarButton: HTMLButtonElement;
   toggleLayoutToolbarButton: HTMLButtonElement;
   searchToolbar: HTMLDivElement;
+  searchInput: HTMLInputElement;
   prevSearchMatchButton: HTMLButtonElement;
   nextSearchMatchButton: HTMLButtonElement;
   zoomToolbar: HTMLDivElement;
@@ -64,6 +65,10 @@ interface CustomToolbarCallbacks {
   onDownloadFileButtonClicked?: () => void;
   onPageNumberChanged?: (pageNumber: number) => void;
   onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
+  onToggleSearchClicked?: (active: boolean) => void;
+  onSearchParamsChanged?: (searchString: string, searchOptions?: SearchOptions) => void;
+  onPrevSearchButtonClicked?: () => void;
+  onNextSearchButtonClicked?: () => void;
   onZoomChanged?: (zoom: number) => void;
   onFitModeChanged?: (fitMode: PdfFitMode) => void;
   onRotateViewerButtonClicked?: () => void;
@@ -92,6 +97,7 @@ export default class CustomToolbar {
       toggleZoomToolbarButton: document.getElementById('toggle-zoom-toolbar-button') as HTMLButtonElement,
       toggleLayoutToolbarButton: document.getElementById('toggle-layout-toolbar-button') as HTMLButtonElement,
       searchToolbar: document.getElementById('search-toolbar') as HTMLDivElement,
+      searchInput: document.getElementById('search-input') as HTMLInputElement,
       prevSearchMatchButton: document.getElementById('prev-search-match-button') as HTMLButtonElement,
       nextSearchMatchButton: document.getElementById('next-search-match-button') as HTMLButtonElement,
       zoomToolbar: document.getElementById('zoom-toolbar') as HTMLDivElement,
@@ -121,6 +127,10 @@ export default class CustomToolbar {
     this.handleToggleSearchToolbarButtonClicked = this.handleToggleSearchToolbarButtonClicked.bind(this);
     this.handleToggleZoomToolbarButtonClicked = this.handleToggleZoomToolbarButtonClicked.bind(this);
     this.handleToggleLayoutToolbarButtonClicked = this.handleToggleLayoutToolbarButtonClicked.bind(this);
+    this.handleSearchInputInput = this.handleSearchInputInput.bind(this);
+    this.handleSearchInputKeypress = this.handleSearchInputKeypress.bind(this);
+    this.handlePrevSearchMatchClicked = this.handlePrevSearchMatchClicked.bind(this);
+    this.handleNextSearchMatchClicked = this.handleNextSearchMatchClicked.bind(this);
     this.handleZoomInButtonClicked = this.handleZoomInButtonClicked.bind(this);
     this.handleZoomOutButtonClicked = this.handleZoomOutButtonClicked.bind(this);
     this.handleZoomDropdownButtonClicked = this.handleZoomDropdownButtonClicked.bind(this);
@@ -145,6 +155,10 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.removeEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.removeEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.removeEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.searchInput.removeEventListener('input', this.handleSearchInputInput);
+    this.dom.searchInput.removeEventListener('keypress', this.handleSearchInputKeypress);
+    this.dom.prevSearchMatchButton.removeEventListener('click', this.handlePrevSearchMatchClicked);
+    this.dom.nextSearchMatchButton.removeEventListener('click', this.handleNextSearchMatchClicked);
     this.dom.zoomInButton.removeEventListener('click', this.handleZoomInButtonClicked);
     this.dom.zoomOutButton.removeEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.removeEventListener('click', this.handleToggleFitButtonClicked);
@@ -190,6 +204,10 @@ export default class CustomToolbar {
     this.dom.toggleInformationPaneButton.addEventListener('click', this.handleToggleInformationPaneButtonClicked);
     this.dom.toggleSearchToolbarButton.addEventListener('click', this.handleToggleSearchToolbarButtonClicked);
     this.dom.toggleZoomToolbarButton.addEventListener('click', this.handleToggleZoomToolbarButtonClicked);
+    this.dom.searchInput.addEventListener('input', this.handleSearchInputInput);
+    this.dom.searchInput.addEventListener('keypress', this.handleSearchInputKeypress);
+    this.dom.prevSearchMatchButton.addEventListener('click', this.handlePrevSearchMatchClicked);
+    this.dom.nextSearchMatchButton.addEventListener('click', this.handleNextSearchMatchClicked);
     this.dom.zoomInButton.addEventListener('click', this.handleZoomInButtonClicked);
     this.dom.zoomOutButton.addEventListener('click', this.handleZoomOutButtonClicked);
     this.dom.toggleFitButton.addEventListener('click', this.handleToggleFitButtonClicked);
@@ -284,6 +302,8 @@ export default class CustomToolbar {
     this.state.searchToolbarOpened = !this.state.searchToolbarOpened;
     this.state.zoomToolbarOpened = false;
     this.state.layoutToolbarOpened = false;
+    this.callbacks.onToggleSearchClicked(this.state.searchToolbarOpened);
+    this.dom.searchInput.value = '';
     this.refreshSecondaryToolbars();
   }
   
@@ -299,6 +319,32 @@ export default class CustomToolbar {
     this.state.zoomToolbarOpened = false;
     this.state.layoutToolbarOpened = !this.state.layoutToolbarOpened;
     this.refreshSecondaryToolbars();
+  }
+
+  private handleSearchInputInput() {
+    this.callbacks.onSearchParamsChanged?.(
+      this.dom.searchInput.value,
+      { 
+        startPage: 1, 
+        isCaseSensitive: false,
+        isWrappingEnabled: false,
+        isRegex: false,
+      },
+    );
+  }
+
+  private handleSearchInputKeypress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.callbacks.onNextSearchButtonClicked();
+    }
+  }
+
+  private handlePrevSearchMatchClicked() {
+    this.callbacks.onPrevSearchButtonClicked?.();
+  }
+
+  private handleNextSearchMatchClicked() {
+    this.callbacks.onNextSearchButtonClicked?.();
   }
 
   private handleZoomInButtonClicked() {
@@ -419,8 +465,8 @@ export default class CustomToolbar {
     this.dom.toggleLayoutToolbarButton.classList.toggle('active', this.state.layoutToolbarOpened);
 
     this.dom.zoomToolbar.style.top = this.state.zoomToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
-    this.dom.layoutToolbar.style.top = this.state.layoutToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
-    this.dom.searchToolbar.style.top = this.state.searchToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
+    this.dom.layoutToolbar.style.top = this.state.layoutToolbarOpened ? `${this.dom.layoutToolbar.parentElement.clientHeight}px` : '0px';
+    this.dom.searchToolbar.style.top = this.state.searchToolbarOpened ? `${this.dom.searchToolbar.parentElement.clientHeight}px` : '0px';
   }
   
   private refreshDropdowns() {

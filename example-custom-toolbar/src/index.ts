@@ -1,4 +1,4 @@
-import { PdfFitMode, PdfPageLayoutMode, PdfWebViewer, PdfWebViewerOptionsInterface } from '@pdf-tools/four-heights-pdf-web-viewer'
+import { PdfFitMode, PdfPageLayoutMode, PdfWebViewer, PdfWebViewerOptionsInterface, SearchOptions } from '@pdf-tools/four-heights-pdf-web-viewer'
 import 'material-icons/iconfont/material-icons.css';
 import './styles.scss'
 import CustomToolbar from './custom-toolbar';
@@ -42,6 +42,18 @@ const customToolbar = new CustomToolbar(
     },
     onLayoutModeChanged(layoutMode: PdfPageLayoutMode) {
       pdfViewer.setPageLayoutMode(layoutMode);
+    },
+    onToggleSearchClicked(active: boolean) {
+      if (!active) pdfViewer.endSearch();
+    },
+    onSearchParamsChanged(searchString: string, searchOptions?: SearchOptions) {
+      searchString.length > 0 ? pdfViewer.startSearch(searchString, searchOptions) : pdfViewer.endSearch();
+    },
+    onPrevSearchButtonClicked() {
+      pdfViewer.previousSearchMatch();
+    },
+    onNextSearchButtonClicked() {
+      pdfViewer.nextSearchMatch();
     },
   },
 );

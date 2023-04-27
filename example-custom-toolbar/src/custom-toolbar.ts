@@ -130,6 +130,7 @@ export default class CustomToolbar {
     this.handleLayoutDropdownButtonClicked = this.handleLayoutDropdownButtonClicked.bind(this);
     this.handleLayoutDropdownOptionClicked = this.handleLayoutDropdownOptionClicked.bind(this);
     this.handleDropdownOutsideClick = this.handleDropdownOutsideClick.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
 
     this.init();
   }
@@ -149,6 +150,7 @@ export default class CustomToolbar {
     this.dom.toggleFitButton.removeEventListener('click', this.handleToggleFitButtonClicked);
     this.dom.rotateViewerButton.removeEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.removeEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
+    window.addEventListener('resize', this.handleWindowResize);
     this.destroyDropdowns();
   }
 
@@ -193,6 +195,7 @@ export default class CustomToolbar {
     this.dom.toggleFitButton.addEventListener('click', this.handleToggleFitButtonClicked);
     this.dom.rotateViewerButton.addEventListener('click', this.handleRotateViewerButtonClicked);
     this.dom.toggleLayoutToolbarButton.addEventListener('click', this.handleToggleLayoutToolbarButtonClicked);
+    window.addEventListener('resize', this.handleWindowResize);
     this.initDropdowns();
   }
 
@@ -385,6 +388,10 @@ export default class CustomToolbar {
     }
   }
 
+  private handleWindowResize() {
+    this.refreshSecondaryToolbars();
+  }
+
   private refreshZoomButtons() {
     let zoomIndex = 0;
     while (this.state.zoomDropdownValue > this.ZOOM_OPTIONS[zoomIndex]) zoomIndex++;
@@ -411,9 +418,9 @@ export default class CustomToolbar {
     this.dom.toggleZoomToolbarButton.classList.toggle('active', this.state.zoomToolbarOpened);
     this.dom.toggleLayoutToolbarButton.classList.toggle('active', this.state.layoutToolbarOpened);
 
-    this.dom.searchToolbar.style.display = this.state.searchToolbarOpened ? 'flex' : 'none';
-    this.dom.zoomToolbar.style.display = this.state.zoomToolbarOpened ? 'flex' : 'none';
-    this.dom.layoutToolbar.style.display = this.state.layoutToolbarOpened ? 'flex' : 'none';
+    this.dom.zoomToolbar.style.top = this.state.zoomToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
+    this.dom.layoutToolbar.style.top = this.state.layoutToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
+    this.dom.searchToolbar.style.top = this.state.searchToolbarOpened ? `${this.dom.zoomToolbar.parentElement.clientHeight}px` : '0px';
   }
   
   private refreshDropdowns() {

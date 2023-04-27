@@ -9,7 +9,7 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
   viewer: {
     general: {
       user: 'John Doe',
-      disableMainToolbar: false,
+      disableMainToolbar: true,
       disableAnnotationToolbar: true,
     },
   },
@@ -48,6 +48,7 @@ const customToolbar = new CustomToolbar(
 
 pdfViewer.addEventListener('appLoaded', function () {
   pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
+  pdfViewer.startSearch('');
 })
 
 pdfViewer.addEventListener('documentLoaded', function () {

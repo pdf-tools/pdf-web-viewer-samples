@@ -5,8 +5,8 @@ $primary-hover: rgb(53, 126, 247, 0.1);
 $secondary: rgb(87, 204, 247);
 $secondary-hover: rgb(87, 204, 247, 0.1);
 $default: rgb(140, 140, 140);
-// $toolbar-background: rgb(242, 242, 242);
-$toolbar-background: white;
+$toolbar-background: #f8f7f7;
+$toolbar-height: 40px;
 
 body {
   font-family: sans-serif;
@@ -14,24 +14,29 @@ body {
   margin: 0;
 }
 
+#pdfviewer {
+  height: calc(100vh - $toolbar-height); 
+  width: 100vw;
+  position: relative;
+  .pwv-SearchBar {
+    display: none;
+  }
+}
+
 .toolbar {
   background: $toolbar-background;
-  border: 1px solid $default;
-  border-radius: $default-border-radius;
 }
 
 #custom-toolbar {
-  position: absolute;
-  top: 120px;
-  left: 15px;
-  width: calc(100vw - 45px);
-  z-index: 2;
+  width: calc(100vw);
 
   .primary-toolbar {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     min-width: 300px;
+    z-index: 3;
+    position: relative;
     
     @media screen and (max-width:640px) {
       flex-direction: column;
@@ -80,16 +85,19 @@ body {
 
   .secondary-toolbar {
     position: absolute;
-    top: 45px;
+    top: 0;
     @media screen and (max-width:640px) {
-      top: 125px;
+      top: calc(3 * $toolbar-height - 1px);
+      width: 100%;
+      justify-content: center;
     }
     right: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
-    display: none;
+    transition: all 0.3s ease;
+    z-index: 2;
 
     #search-form-field {
       margin: 0 6px;
@@ -100,7 +108,7 @@ body {
         font-size: 20px;
         top: 3px;
         left: 3px;
-        background: $toolbar-background;
+        background: white;
       }
 
       #search-input {

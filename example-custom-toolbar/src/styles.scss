@@ -21,9 +21,6 @@ body {
   height: calc(100vh - $toolbar-height); 
   width: 100vw;
   position: relative;
-  .pwv-SearchBar {
-    display: none;
-  }
 }
 
 .toolbar {

@@ -1,5 +1,16 @@
 import { PdfFitMode, PdfPageLayoutMode, SearchOptions } from "@pdf-tools/four-heights-pdf-web-viewer";
 
+/**
+  * Custom toolbar example showcases implementation of custom toolbar for PDF Web Viewer.
+  * Implementation is done in Vanilla TypeScript.
+  * Feel free to use it as an example, but implementation can be done by using any library or framework (React, Angular, Vue...).
+  * 
+  * CustomToolbarState tracks internal component state.
+  * CustomToolbarDOM contains interactive HTMLElements that are part of CustomToolbar.
+  * CustomToolbarCallbacks are used to invoke PDF Web Viewer methods when user interacts with Custom Toolbar.
+  * CustomToolbarOptions are used to customize CustomToolbar behaviour.
+ */
+
 interface CustomToolbarState {
   informationPaneOpened: boolean;
   pageNumber: number;
@@ -9,6 +20,7 @@ interface CustomToolbarState {
   isSearchWrappingEnabled: boolean;
   isSearchRegex: boolean;
   fitMode: PdfFitMode;
+  rotation: number;
   layoutDropdownOpened: boolean;
   layoutDropdownValue: PdfPageLayoutMode;
   zoomDropdownOpened: boolean;
@@ -28,6 +40,7 @@ const initialState: CustomToolbarState = {
   isSearchRegex: false,
   layoutDropdownOpened: false,
   fitMode: PdfFitMode.NONE,
+  rotation: 0,
   layoutDropdownValue: PdfPageLayoutMode.ONE_COLUMN,
   zoomDropdownOpened: false,
   zoomDropdownValue: 100,
@@ -62,7 +75,6 @@ interface CustomToolbarDOM {
   zoomDropdown: HTMLDivElement;
   zoomDropdownButton: HTMLDivElement,
   zoomDropdownOptionsContainer: HTMLDivElement,
-  zoomDropdownOptions: NodeListOf<HTMLDivElement>,
   layoutToolbar: HTMLDivElement;
   toggleFitButton: HTMLButtonElement;
   rotateViewerButton: HTMLButtonElement;
@@ -72,29 +84,36 @@ interface CustomToolbarDOM {
   layoutDropdownOptions: NodeListOf<HTMLDivElement>,
 }
 
-interface CustomToolbarCallbacks {
+export interface CustomToolbarCallbacks {
   onUploadFile?: (file: File) => void;
   onDownloadFileButtonClicked?: () => void;
   onPageNumberChanged?: (pageNumber: number) => void;
-  onToggleInformationPaneButtonClicked?: (visible: boolean) => void;
+  onToggleInformationPaneButtonClicked?: () => void;
   onToggleSearchClicked?: (active: boolean) => void;
   onSearchParamsChanged?: (searchString: string, searchOptions?: SearchOptions) => void;
   onPrevSearchButtonClicked?: () => void;
   onNextSearchButtonClicked?: () => void;
   onZoomChanged?: (zoom: number) => void;
   onFitModeChanged?: (fitMode: PdfFitMode) => void;
-  onRotateViewerButtonClicked?: () => void;
+  onRotationChanged?: (rotation: number) => void;
   onLayoutModeChanged?: (layoutMode: PdfPageLayoutMode) => void;
 }
+
+export interface CustomToolbarOptions {
+  defaultZoomLevels: number[];
+}
+
+const defaultOptions = {
+  defaultZoomLevels: [ 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.5, 0.65, 0.8, 1, 1.25, 1.50, 2, 2.5, 3, 4 ],
+};
 
 export default class CustomToolbar {
   private state: CustomToolbarState;
   private dom: CustomToolbarDOM;
   private callbacks: CustomToolbarCallbacks;
+  private options: CustomToolbarOptions;
 
-  private readonly ZOOM_OPTIONS = [ 10, 15, 20, 25, 35, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 400 ];
-
-  constructor(callbacks?: CustomToolbarCallbacks) {
+  constructor(callbacks?: CustomToolbarCallbacks, options?: CustomToolbarOptions) {
     this.state = { ...initialState };
     this.dom = {
       uploadFileButton: document.getElementById('upload-file-button') as HTMLButtonElement,
@@ -122,7 +141,6 @@ export default class CustomToolbar {
       zoomDropdown: document.getElementById('zoom-dropdown') as HTMLDivElement,
       zoomDropdownButton: document.querySelector('#zoom-dropdown .dropdown-button') as HTMLDivElement,
       zoomDropdownOptionsContainer: document.querySelector('#zoom-dropdown .dropdown-options-container') as HTMLDivElement,
-      zoomDropdownOptions: document.querySelectorAll('#zoom-dropdown .dropdown-options-container .dropdown-option') as NodeListOf<HTMLDivElement>,
       layoutToolbar: document.getElementById('layout-toolbar') as HTMLDivElement,
       toggleFitButton: document.getElementById('toggle-fit-button') as HTMLButtonElement,
       rotateViewerButton: document.getElementById('rotate-viewer-button') as HTMLButtonElement,
@@ -132,6 +150,7 @@ export default class CustomToolbar {
       layoutDropdownOptions: document.querySelectorAll('#layout-dropdown .dropdown-options-container .dropdown-option') as NodeListOf<HTMLDivElement>,
     };
     this.callbacks = { ...callbacks };
+    this.options = { ...defaultOptions, ...options };
 
     this.handleUploadFileButtonClicked = this.handleUploadFileButtonClicked.bind(this);
     this.handleUploadFileInputChanged = this.handleUploadFileInputChanged.bind(this);
@@ -207,11 +226,15 @@ export default class CustomToolbar {
     this.refreshFitModeIcon();
   }
 
+  setRotation(rotation: number) {
+    this.state.rotation = rotation;
+  }
+
   setZoom(zoom: number) {
     this.state.zoomDropdownValue = zoom;
 
     const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
-    dropdownValue.innerText = `${zoom}%`;
+    dropdownValue.innerText = `${Math.floor(this.state.zoomDropdownValue * 100)}%`;
 
     this.refreshZoomButtons();
   }
@@ -245,7 +268,16 @@ export default class CustomToolbar {
   private initDropdowns() {
     this.dom.zoomDropdownButton.addEventListener('click', this.handleZoomDropdownButtonClicked);
 
-    this.dom.zoomDropdownOptions.forEach((dropdownOption) => {
+    const dropdownOptions = this.options.defaultZoomLevels.map((zoomLevel) => {
+      const dropdownOption = document.createElement('div');
+      dropdownOption.classList.add('dropdown-option');
+      dropdownOption.setAttribute('data-value', zoomLevel.toString());
+      dropdownOption.textContent = `${Math.floor(zoomLevel * 100)}%`;
+      this.dom.zoomDropdownButton.nextElementSibling.appendChild(dropdownOption);
+      return dropdownOption;
+    });
+
+    dropdownOptions.forEach((dropdownOption) => {
       dropdownOption.addEventListener('click', this.handleZoomDropdownOptionClicked);
     });
 
@@ -261,7 +293,7 @@ export default class CustomToolbar {
   private destroyDropdowns() {
     this.dom.zoomDropdownButton.removeEventListener('click', this.handleZoomDropdownButtonClicked);
 
-    this.dom.zoomDropdownOptions.forEach((dropdownOption) => {
+    this.dom.zoomDropdownButton.nextElementSibling.childNodes.forEach((dropdownOption) => {
       dropdownOption.removeEventListener('click', this.handleZoomDropdownOptionClicked);
     });
 
@@ -320,7 +352,7 @@ export default class CustomToolbar {
   private handleToggleInformationPaneButtonClicked() {
     this.state.informationPaneOpened = !this.state.informationPaneOpened;
     this.dom.toggleInformationPaneButton.classList.toggle('active', this.state.informationPaneOpened);
-    this.callbacks.onToggleInformationPaneButtonClicked?.(this.state.informationPaneOpened);
+    this.callbacks.onToggleInformationPaneButtonClicked?.();
   }
 
   private handleToggleSearchToolbarButtonClicked() {
@@ -354,6 +386,7 @@ export default class CustomToolbar {
         isCaseSensitive: this.state.isSearchCaseSensitive,
         isWrappingEnabled: this.state.isSearchWrappingEnabled,
         isRegex: this.state.isSearchRegex,
+        hideToolbar: true,
       },
     );
   }
@@ -389,26 +422,26 @@ export default class CustomToolbar {
 
   private handleZoomInButtonClicked() {
     let zoomIndex = 0;
-    while (this.state.zoomDropdownValue >= this.ZOOM_OPTIONS[zoomIndex]) zoomIndex++;
-    this.state.zoomDropdownValue = this.ZOOM_OPTIONS[zoomIndex];
+    while (this.state.zoomDropdownValue >= this.options.defaultZoomLevels[zoomIndex]) zoomIndex++;
+    this.state.zoomDropdownValue = this.options.defaultZoomLevels[zoomIndex];
 
     this.callbacks.onZoomChanged?.(this.state.zoomDropdownValue);
 
     const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
-    dropdownValue.innerText = `${this.state.zoomDropdownValue}%`;
+    dropdownValue.innerText = `${Math.floor(this.state.zoomDropdownValue * 100)}%`;
 
     this.refreshZoomButtons();
   }
 
   private handleZoomOutButtonClicked() {
-    let zoomIndex = this.ZOOM_OPTIONS.length - 1;
-    while (this.state.zoomDropdownValue <= this.ZOOM_OPTIONS[zoomIndex]) zoomIndex--;
-    this.state.zoomDropdownValue = this.ZOOM_OPTIONS[zoomIndex];
+    let zoomIndex = this.options.defaultZoomLevels.length - 1;
+    while (this.state.zoomDropdownValue <= this.options.defaultZoomLevels[zoomIndex]) zoomIndex--;
+    this.state.zoomDropdownValue = this.options.defaultZoomLevels[zoomIndex];
 
     this.callbacks.onZoomChanged?.(this.state.zoomDropdownValue);
 
     const dropdownValue = this.dom.zoomDropdown.querySelector('.dropdown-value') as HTMLSpanElement;
-    dropdownValue.innerText = `${this.state.zoomDropdownValue}%`;
+    dropdownValue.innerText = `${Math.floor(this.state.zoomDropdownValue * 100)}%`;
 
     this.refreshZoomButtons();
   }
@@ -442,7 +475,8 @@ export default class CustomToolbar {
   }
 
   private handleRotateViewerButtonClicked() {
-    this.callbacks.onRotateViewerButtonClicked?.();
+    this.state.rotation = (this.state.rotation + 90) % 360;
+    this.callbacks.onRotationChanged?.(this.state.rotation);
   }
 
   private handleLayoutDropdownButtonClicked() {
@@ -480,8 +514,8 @@ export default class CustomToolbar {
 
   private refreshZoomButtons() {
     let zoomIndex = 0;
-    while (this.state.zoomDropdownValue > this.ZOOM_OPTIONS[zoomIndex]) zoomIndex++;
-    this.dom.zoomInButton.disabled = zoomIndex >= this.ZOOM_OPTIONS.length - 1;
+    while (this.state.zoomDropdownValue > this.options.defaultZoomLevels[zoomIndex]) zoomIndex++;
+    this.dom.zoomInButton.disabled = zoomIndex >= this.options.defaultZoomLevels.length - 1;
     this.dom.zoomOutButton.disabled = zoomIndex <= 0;
   }
 

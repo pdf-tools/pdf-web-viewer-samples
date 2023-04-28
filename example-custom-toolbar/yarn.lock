@@ -97,10 +97,10 @@
   resolved "https://registry.yarnpkg.com/@pdf-tools/four-heights-pdf-viewing/-/four-heights-pdf-viewing-4.2.0-dev.12944.tgz#825f680fae2bdc0106f285fc076b2996a1b78141"
   integrity sha512-d5xGFfTkOt1Q02cGo61g8xyIkhrr1HpiAY8u1m4Tw3xAjw8Kn8edb2f9RK/8wwF2C8nluyD72BKbCswgunMtEg==
 
-"@pdf-tools/four-heights-pdf-web-viewer@^4.2.0-dev.13199":
-  version "4.2.0-dev.13199"
-  resolved "https://registry.yarnpkg.com/@pdf-tools/four-heights-pdf-web-viewer/-/four-heights-pdf-web-viewer-4.2.0-dev.13199.tgz#c5f9c91713aa9c71f19c1b0bc849a3289e80c443"
-  integrity sha512-ca+DuUa0qv7hZb4aYF1nvpPdVfa+5+z+E1l1aTO2lthGmezEKYivMAT3iViswjTPDqvff3Wk2xnoJ5qEMIlS3Q==
+"@pdf-tools/four-heights-pdf-web-viewer@^4.2.0-dev.13264":
+  version "4.2.0-dev.13264"
+  resolved "https://registry.yarnpkg.com/@pdf-tools/four-heights-pdf-web-viewer/-/four-heights-pdf-web-viewer-4.2.0-dev.13264.tgz#ac155a926bda5b90825425e3d82dd16371f2e25d"
+  integrity sha512-eGMSpSB20prWLZpySm80sQta7MlB9I1FZYxpbJD3Qbh5IC3yDpuewin73PF8juxTbyBxpXGZuOPb8wzvkebptg==
   dependencies:
     "@pdf-tools/four-heights-pdf-viewing" "^4.2.0-dev.12944"
 

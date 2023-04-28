@@ -1,72 +1,105 @@
 import { PdfFitMode, PdfPageLayoutMode, PdfWebViewer, PdfWebViewerOptionsInterface, SearchOptions } from '@pdf-tools/four-heights-pdf-web-viewer'
 import 'material-icons/iconfont/material-icons.css';
 import './styles.scss'
-import CustomToolbar from './custom-toolbar';
+import CustomToolbar, { CustomToolbarCallbacks, CustomToolbarOptions } from './custom-toolbar';
 
-const viewerElement = document.getElementById('pdfviewer')
-const license = ''
+/**
+  * Custom toolbar example showcases implementation of custom toolbar for PDF Web Viewer.
+  * Implementation is done in Vanilla TypeScript.
+  * Feel free to use it as an example, but implementation can be done by using any library or framework (React, Angular, Vue...).
+  * 
+  * CustomToolbarState tracks internal component state.
+  * CustomToolbarDOM contains interactive HTMLElements that are part of CustomToolbar.
+  * CustomToolbarCallbacks are used to invoke PDF Web Viewer methods when user interacts with Custom Toolbar.
+  * CustomToolbarOptions are used to customize CustomToolbar behaviour.
+ */
+
+const viewerElement = document.getElementById('pdfviewer');
+const license = '';
+
+/**
+ * Predefined zoom levels are being passed to both PDF Web Viewer and CustomToolbar.
+ * This ensures that both PDF Web Viewer and CustomToolbar react exactly the same on user input.
+ * Zooming can be done by using zoom in and out buttons, by using zoom dropdown and by using CTRL + MouseWheel.
+ */
+
+const zoomLevels = [ 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.5, 0.65, 0.8, 1, 1.25, 1.50, 2, 2.5, 3, 4 ];
+
 const options: Partial<PdfWebViewerOptionsInterface> = {
   viewer: {
     general: {
       user: 'John Doe',
       disableMainToolbar: true,
-      disableAnnotationToolbar: true,
+      disableAnnotationToolbar: false,
+      defaultZoomLevels: zoomLevels,
     },
   },
-}
+};
 
-const pdfViewer = new PdfWebViewer(viewerElement, license, options)
+const pdfViewer = new PdfWebViewer(viewerElement, license, options);
 
-const customToolbar = new CustomToolbar(
-  {
-    onUploadFile(file: File) {
-      pdfViewer.open({ data: file });
-    },
-    onDownloadFileButtonClicked() {
-      pdfViewer.downloadFile();
-    },
-    onPageNumberChanged(pageNumber: number) {
-      pdfViewer.setPageNumber(pageNumber);
-    },
-    onToggleInformationPaneButtonClicked(visible: boolean) {
-      visible ? pdfViewer.showInformationPane() : pdfViewer.hideInformationPane();
-    },
-    onZoomChanged(zoom: number) {
-      pdfViewer.setZoom(zoom / 100);
-    },
-    onRotateViewerButtonClicked() {
-      pdfViewer.setRotation((pdfViewer.getRotation() + 90) % 360);
-    },
-    onFitModeChanged(fitMode: PdfFitMode) {
-      pdfViewer.setFitMode(fitMode);
-    },
-    onLayoutModeChanged(layoutMode: PdfPageLayoutMode) {
-      pdfViewer.setPageLayoutMode(layoutMode);
-    },
-    onToggleSearchClicked(active: boolean) {
-      if (!active) pdfViewer.endSearch();
-    },
-    onSearchParamsChanged(searchString: string, searchOptions?: SearchOptions) {
-      searchString.length > 0 ? pdfViewer.startSearch(searchString, searchOptions) : pdfViewer.endSearch();
-    },
-    onPrevSearchButtonClicked() {
-      pdfViewer.previousSearchMatch();
-    },
-    onNextSearchButtonClicked() {
-      pdfViewer.nextSearchMatch();
-    },
+// CustomToolbarCallbacks are used to invoke PDF Web Viewer methods when user interacts with Custom Toolbar
+
+const customToolbarCallbacks: CustomToolbarCallbacks = {
+  onUploadFile(file: File) {
+    pdfViewer.open({ data: file });
   },
-);
+  onDownloadFileButtonClicked() {
+    pdfViewer.downloadFile();
+  },
+  onPageNumberChanged(pageNumber: number) {
+    pdfViewer.setPageNumber(pageNumber);
+  },
+  onToggleInformationPaneButtonClicked() {
+    pdfViewer.toggleInformationPane();
+  },
+  onZoomChanged(zoom: number) {
+    pdfViewer.setZoom(zoom);
+  },
+  onRotationChanged(rotation: number) {
+    pdfViewer.setRotation(rotation);
+  },
+  onFitModeChanged(fitMode: PdfFitMode) {
+    pdfViewer.setFitMode(fitMode);
+  },
+  onLayoutModeChanged(layoutMode: PdfPageLayoutMode) {
+    pdfViewer.setPageLayoutMode(layoutMode);
+  },
+  onToggleSearchClicked(active: boolean) {
+    if (!active) pdfViewer.endSearch();
+  },
+  onSearchParamsChanged(searchString: string, searchOptions?: SearchOptions) {
+    searchString.length > 0 ? pdfViewer.startSearch(searchString, searchOptions) : pdfViewer.endSearch();
+  },
+  onPrevSearchButtonClicked() {
+    pdfViewer.previousSearchMatch();
+  },
+  onNextSearchButtonClicked() {
+    pdfViewer.nextSearchMatch();
+  },
+};
+
+// CustomToolbarOptions are used to customize CustomToolbar behaviour
+
+const customToolbarOptions: CustomToolbarOptions = {
+  defaultZoomLevels: zoomLevels,
+};
+
+// Custom toolbar instantiation
+
+const customToolbar = new CustomToolbar(customToolbarCallbacks, customToolbarOptions);
+
+// PDF Web Viewer event listeners are used to synchronize CustomToolbar state with PDF Web Viewer state
 
 pdfViewer.addEventListener('appLoaded', function () {
   pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-  pdfViewer.startSearch('');
-})
+});
 
 pdfViewer.addEventListener('documentLoaded', function () {
   customToolbar.setPageNumber(pdfViewer.getPageNumber());
   customToolbar.setPageCount(pdfViewer.getPageCount());
-})
+  customToolbar.setRotation(pdfViewer.getRotation());
+});
 
 pdfViewer.addEventListener('pageNumberChanged', function (pageNumber: number) {
   customToolbar.setPageNumber(pageNumber);
@@ -77,5 +110,9 @@ pdfViewer.addEventListener('fitModeChanged', function (fitMode: PdfFitMode) {
 });
 
 pdfViewer.addEventListener('zoomChanged', function (zoom: number) {
-  customToolbar.setZoom(Math.floor(zoom * 100));
+  customToolbar.setZoom(zoom);
+});
+
+pdfViewer.addEventListener('rotationChanged', function (rotation: number) {
+  customToolbar.setRotation(rotation);
 });

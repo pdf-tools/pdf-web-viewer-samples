@@ -361,6 +361,9 @@ export default class CustomToolbar {
     this.state.layoutToolbarOpened = false;
     this.callbacks.onToggleSearchClicked(this.state.searchToolbarOpened);
     this.dom.searchInput.value = '';
+    if (this.state.searchToolbarOpened) {
+      this.dom.searchInput.focus();
+    }
     this.refreshSecondaryToolbars();
   }
   

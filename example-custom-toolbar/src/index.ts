@@ -1,7 +1,6 @@
 import { PdfFitMode, PdfPageLayoutMode, PdfWebViewer, PdfWebViewerOptionsInterface, SearchOptions } from '@pdf-tools/four-heights-pdf-web-viewer'
-import 'material-icons/iconfont/material-icons.css';
-import './styles.scss'
 import CustomToolbar, { CustomToolbarCallbacks, CustomToolbarOptions } from './custom-toolbar';
+import './styles/styles.scss'
 
 /**
   * Custom toolbar example showcases implementation of custom toolbar for PDF Web Viewer.

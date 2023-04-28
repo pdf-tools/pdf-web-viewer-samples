@@ -33,7 +33,7 @@ $toolbar-hoverBg: var(--pwv-ui-color-200);
 
 /***********************
     * viewer
-    ***********************/
+***********************/
 $viewer__BackgroundColor: var(--pwv-ui-color-200);
 $viewer__TextColor: var(--pwv-text-color);
 $viewer__FontSize: inherit;
@@ -44,7 +44,7 @@ $viewer__DocumentBusyIndicatorColor: var(--pwv-brand-color-500);
 
 /***********************
     * dialog
-    ***********************/
+***********************/
 $modal__BackgroundColor: var(--pwv-brand-color-500);
 
 $dialog__BackgroundColor: var(--pwv-brand-color-500);
@@ -60,7 +60,7 @@ $dialog__DragOverBorder: dashed 2px var(--pwv-brand-color-200);
 $dialog__BorderRadius: 20px;
 
 /***********************
-* button
+    * button
 ***********************/
 
 $button__TextColor: $dialog__TextColor;
@@ -90,7 +90,7 @@ $button__DisabledBackgroundColor: transparent;
 $button__DisabledBorder: solid 1px var(--pwv-brand-color-100);
 
 /***********************
-* popup
+    * popup
 ***********************/
 
 $popup__BackgroundColor: var(--pwv-ui-color-200);

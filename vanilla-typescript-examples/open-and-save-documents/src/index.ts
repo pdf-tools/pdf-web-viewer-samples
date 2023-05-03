@@ -1,5 +1,5 @@
 import { PdfWebViewer } from '@pdf-tools/four-heights-pdf-web-viewer'
-import './styles.css'
+import './styles.scss'
 
 const viewerElement = document.getElementById('pdfviewer')
 const license = ''
@@ -27,7 +27,7 @@ async function handleOpenDocument() {
     const blobData = await res.blob()
     pdfViewer.open({ data: blobData })
   } else {
-    console.error('save documet failed')
+    console.error('open document failed')
   }
 }
 
@@ -44,6 +44,6 @@ async function handleSaveDocument() {
   if (res.ok) {
     console.log('document saved')
   } else {
-    console.error('save documet failed')
+    console.error('save document failed')
   }
 }

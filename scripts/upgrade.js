@@ -17,9 +17,7 @@ if (!packageVersion)
 
 shell.sed('-i', 'tree/.*/', `tree/${branchName}/`, 'README.md')
 
-const exampleRootFolders = [
-  'vanilla-typescript-examples',
-]
+const exampleRootFolders = ['vanilla-typescript-examples']
 
 const exampleDirectoryPaths = []
 
@@ -28,8 +26,10 @@ exampleRootFolders.forEach((exampleRootFolder) => {
 
   const directories = shell.ls()
 
-  exampleDirectoryPaths.push(...directories.map((directory) => `${exampleRootFolder}/${directory}`))
-  
+  exampleDirectoryPaths.push(
+    ...directories.map((directory) => `${exampleRootFolder}/${directory}`)
+  )
+
   shell.cd('..')
 })
 

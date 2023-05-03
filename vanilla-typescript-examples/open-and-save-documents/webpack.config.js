@@ -10,14 +10,23 @@ const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer')
 const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   mode: 'development',
   devtool: 'source-map',
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -29,14 +38,14 @@ module.exports = {
     path: path.resolve(__dirname, 'build')
   },
   devServer: {
+    allowedHosts: 'all',
     setupMiddlewares: (middlewares, devServer) => {
       devServer.app.post('/upload', (req, res) => {
         console.log('file uploaded')
         res.json({ status: 'ok' })
       })
       return middlewares
-    },
-    allowedHosts: 'all'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

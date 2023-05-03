@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">
+      window.PDFTOOLS_FOURHEIGHTS_PDFVIEWING_BASEURL = "./pdfwebviewer/";
+    </script>
+    <title>4-Heights® PDF Web Viewer</title>
+  </head>
+  <body>
+    <div id="custom-toolbar">
+      <div class="toolbar primary-toolbar">
+        <div class="left-side">
+          <button id="upload-file-button" class="action-button">
+            <span class="material-icons-outlined">upload_file</span>
+            <input id="upload-file-input" type="file" hidden="true" accept="application/pdf" />
+          </button>
+          <button id="download-file-button" class="action-button">
+            <span class="material-icons-outlined">download</span>
+          </button>
+        </div>
+        <div class="mid-side">
+          <div class="pagination">
+            <button id="toggle-information-pane-button" class="action-button">
+              <span class="material-icons-outlined">list_alt</span>
+            </button>
+            <div class="pagination-info">
+              <input id="page-number-input" type="number" value="1" /> of <span id="page-count">1</span>
+            </div>
+            <button id="prev-page-button" class="action-button">
+              <span class="material-icons-outlined">chevron_left</span>
+            </button>
+            <button id="next-page-button" class="action-button">
+              <span class="material-icons-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+        <div class="right-side">
+          <button id="toggle-search-toolbar-button"  class="action-button">
+            <span class="material-icons-outlined">search</span>
+          </button>
+          <button id="toggle-zoom-toolbar-button" class="action-button">
+            <span class="material-icons-outlined">zoom_in</span>
+          </button>
+          <button id="toggle-layout-toolbar-button" class="action-button">
+            <span class="material-icons-outlined">menu_book</span>
+          </button>
+        </div>
+      </div>
+      <div id="search-toolbar" class="toolbar secondary-toolbar">
+        <div id="main-search-options">
+          <div id="search-form-field">
+            <span class="search-icon material-icons-outlined">search</span>
+            <input id="search-input" type="text" value="" />
+          </div>
+          <button id="prev-search-match-button" class="action-button">
+            <span class="material-icons-outlined">keyboard_arrow_up</span>
+          </button>
+          <button id="next-search-match-button" class="action-button">
+            <span class="material-icons-outlined">keyboard_arrow_down</span>
+          </button>
+        </div>
+        <div id="search-options">
+          <div class="checkbox">
+            <input type="checkbox" id="case-sensitive-search-checkbox" name="case-sensitive-search-checkbox">
+            <label for="case-sensitive-search-checkbox">Case sensitive</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="wrap-search-checkbox" name="wrap-search-checkbox">
+            <label for="wrap-search-checkbox">Wrap search</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="regular-expression-search-checkbox" name="regular-expression-search-checkbox">
+            <label for="regular-expression-search-checkbox">Regular expression</label>
+          </div>
+        </div>
+      </div>
+      <div id="zoom-toolbar" class="toolbar secondary-toolbar">
+        <button id="zoom-in-button" class="action-button">
+          <span class="material-icons-outlined">zoom_in</span>
+        </button>
+        <button id="zoom-out-button" class="action-button">
+          <span class="material-icons-outlined">zoom_out</span>
+        </button>
+        <div id="zoom-dropdown" class="dropdown">
+          <button class="dropdown-button">
+            <span class="dropdown-value">100%</span>
+            <span class="material-icons-outlined">arrow_drop_down</span>
+          </button>
+          <div class="dropdown-options-container">
+          </div>
+        </div>
+      </div>
+      <div id="layout-toolbar" class="toolbar secondary-toolbar">
+        <button id="toggle-fit-button" class="action-button">
+          <span class="material-icons-outlined">fullscreen</span>
+        </button>
+        <button id="rotate-viewer-button" class="action-button">
+          <span class="material-icons-outlined">rotate_right</span>
+        </button>
+        <div id="layout-dropdown" class="dropdown">
+          <button class="dropdown-button">
+            <span class="dropdown-value">One column</span>
+            <span class="material-icons-outlined">arrow_drop_down</span>
+          </button>
+          <div class="dropdown-options-container">
+            <div class="dropdown-option" data-value="1">One column</div>
+            <div class="dropdown-option" data-value="0">Single page</div>
+            <div class="dropdown-option" data-value="2">Two column left</div>
+            <div class="dropdown-option" data-value="3">Two column right</div>
+            <div class="dropdown-option" data-value="4">Two page left</div>
+            <div class="dropdown-option" data-value="5">Two page right</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="pdfviewer"></div>
+  </body>
+</html>

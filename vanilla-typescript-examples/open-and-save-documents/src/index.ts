@@ -1,9 +1,12 @@
-import { PdfWebViewer } from '@pdf-tools/four-heights-pdf-web-viewer'
-import './styles.scss'
+import {
+  PdfWebViewer,
+  PdfWebViewerOptionsInterface
+} from '@pdf-tools/four-heights-pdf-web-viewer';
+import './styles.scss';
 
-const viewerElement = document.getElementById('pdfviewer')
-const license = ''
-const options = {
+const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
+const license: string = '';
+const options: Partial<PdfWebViewerOptionsInterface> = {
   viewer: {
     permissions: {
       allowFileDrop: false
@@ -13,26 +16,27 @@ const options = {
       onSaveFileButtonClicked: handleSaveDocument
     }
   }
-}
+};
 
-const pdfViewer = new PdfWebViewer(viewerElement, license, options)
+const pdfViewer = new PdfWebViewer(viewerElement, license, options);
 
-pdfViewer.addEventListener('appLoaded', function () {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' })
-})
+pdfViewer.addEventListener('appLoaded', () => {
+  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
+});
 
 async function handleOpenDocument() {
-  const res = await fetch('/PdfWebViewer.pdf')
+  const res = await fetch('/PdfWebViewer.pdf');
+
   if (res.ok) {
-    const blobData = await res.blob()
-    pdfViewer.open({ data: blobData })
+    const blobData = await res.blob();
+    pdfViewer.open({ data: blobData });
   } else {
-    console.error('open document failed')
+    console.error('open document failed');
   }
 }
 
 async function handleSaveDocument() {
-  const pdfData = await pdfViewer.save()
+  const pdfData = await pdfViewer.save();
 
   const res = await fetch('/upload', {
     method: 'POST',
@@ -40,10 +44,11 @@ async function handleSaveDocument() {
       'Content-Type': 'application/pdf'
     },
     body: pdfData
-  })
+  });
+
   if (res.ok) {
-    console.log('document saved')
+    console.log('document saved');
   } else {
-    console.error('save document failed')
+    console.error('save document failed');
   }
 }

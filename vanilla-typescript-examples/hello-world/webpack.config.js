@@ -1,13 +1,13 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webViewerNodeModluesDir = path.dirname(
   require.resolve('@pdf-tools/four-heights-pdf-web-viewer')
-)
+);
 
-const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer')
-const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc')
+const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');
+const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc');
 
 module.exports = {
   entry: './src/index.ts',
@@ -60,4 +60,4 @@ module.exports = {
       ]
     })
   ]
-}
+};

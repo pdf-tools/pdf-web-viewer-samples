@@ -1,0 +1,128 @@
+/***********************
+ * mixins
+ ***********************/
+// dialog
+
+@mixin dialog {
+    background-color: $dialog__BackgroundColor;
+    color: $dialog__TextColor;
+}
+
+// button
+@mixin button {
+    height: $button__Height;
+    padding: 0 1rem;
+    margin: 0.5rem;
+    color: $button__TextColor;
+    background-color: $button__BackgroundColor;
+    border: $button__Border;
+    border-radius: $button__BorderRadius;
+    transition: all 0.2s;
+}
+
+@mixin button__Hover {
+    color: $button__HoverTextColor;
+    background-color: $button__HoverBackgroundColor;
+    border: $button__HoverBorder;
+}
+
+@mixin button__Active {
+    transform: scale(0.98);
+    color: $button__ActiveTextColor;
+    background-color: $button__ActiveBackgroundColor;
+    border: $button__ActiveBorder;
+}
+
+@mixin button__Focus {
+    color: $button__FocusTextColor;
+    background-color: $button__FocusBackgroundColor;
+    border: $button__FocusBorder;
+}
+
+@mixin button__Disabled {
+    color: $button__DisabledTextColor;
+    background-color: $button__DisabledBackgroundColor;
+    border: $button__DisabledBorder;
+    opacity: 0.25;
+}
+
+@mixin buttonPrimary {}
+
+// toolbar
+@mixin toolbar {
+    background-color: $toolbar__BackgroundColor;
+    color: $toolbar__TextColor;
+}
+
+@mixin toolbarItem {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: $toolbarItem__Border;
+    border-radius: $toolbarItem__BorderRadius;
+    height: $toolbarItem__height;
+    min-width: $toolbarItem__MinWidth;
+    margin: $toolbarItem__Margin;
+    background-color: $toolbarItem__BackgroundColor;
+    color: $toolbarItem__TextColor;
+    cursor: $toolbarItem__CursorStyle;
+}
+
+@mixin toolbar__Dense {}
+
+@mixin toolbarItem__Hover {
+    color: $toolbarItem__HoverTextColor;
+    background-color: $toolbarItem__HoverBackgroundColor;
+    border: $toolbarItem__HoverBorder;
+}
+
+@mixin toolbarItem__Active {
+    color: $toolbarItem__ActiveTextColor;
+    background-color: $toolbarItem__ActiveBackgroundColor;
+    border: $toolbarItem__ActiveBorder;
+
+    svg,
+    img {
+        transform: scale(0.94);
+    }
+}
+
+@mixin toolbarItem__Focus {
+    color: $toolbarItem__FocusTextColor;
+    background-color: $toolbarItem__FocusBackgroundColor;
+    border: $toolbarItem__FocusBorder;
+}
+
+@mixin toolbarItem__Disabled {
+    color: $toolbarItem__DisabledTextColor;
+    background-color: $toolbarItem__DisabledBackgroundColor;
+    border: $toolbarItem__DisabledBorder;
+    cursor: default;
+}
+
+@mixin toolbarItem__Selected {
+    color: $toolbarItem__SelectedTextColor !important;
+    background-color: $toolbarItem__SelectedBackgroundColor !important;
+    border: $toolbarItem__SelectedBorder !important;
+}
+
+@mixin dropdownItem {
+    min-height: $dropdownItem__Height;
+    background-color: $dropdownItem__BackgroundColor;
+    color: $dropdownItem__TextColor;
+    margin: $dropdownItem__Margin;
+    min-height: $dropdownItem__Height;
+    width: calc(100% - 2 * $dropdownItem__Margin);
+    border: none;
+    border: $dropdownItem__Border;
+    border-radius: $dropdownItem__BorderRadius;
+}
+
+@mixin dropdownItem__Hover {
+    color: $dropdownItem__HoverTextColor;
+    background-color: $dropdownItem__HoverBackgroundColor;
+    border: $dropdownItem__HoverBorder;
+}

@@ -1,0 +1,190 @@
+/***********************
+ * colors
+***********************/
+$brand-color: #005e8d;
+$gray: #455057;
+$white: #000000;
+$black: #7cc6eb;
+
+$gray-100: shade-color($gray, 80%);
+$gray-200: shade-color($gray, 60%);
+$gray-300: shade-color($gray, 40%);
+$gray-400: shade-color($gray, 20%);
+$gray-500: $gray;
+$gray-600: tint-color($gray, 20%);
+$gray-700: tint-color($gray, 40%);
+$gray-800: tint-color($gray, 60%);
+$gray-900: tint-color($gray, 80%);
+
+$brand-100: shade-color($brand-color, 80%);
+$brand-200: shade-color($brand-color, 60%);
+$brand-300: shade-color($brand-color, 40%);
+$brand-400: shade-color($brand-color, 20%);
+$brand-500: $brand-color;
+$brand-600: tint-color($brand-color, 20%);
+$brand-700: tint-color($brand-color, 40%);
+$brand-800: tint-color($brand-color, 60%);
+$brand-900: tint-color($brand-color, 80%);
+
+$selection-color: #006395;
+$contextbar-shadow: 0 3px 8px rgba(black, 0.4);
+$loader-color: $brand-200;
+
+/***********************
+ * viewer
+***********************/
+$viewer__BackgroundColor: $gray-300;
+$viewer__TextColor: $gray-900;
+$viewer__FontSize: inherit;
+$viewer__FontFamily: inherit;
+
+$viewer__DocumentBackgroundColor: $gray-300;
+$viewer__DocumentBusyIndicatorColor: $brand-500;
+
+/***********************
+ * dialog
+***********************/
+$modal__BackgroundColor: $brand-500;
+
+$dialog__BackgroundColor: $brand-500;
+$dialog__TextColor: $white;
+
+$dialog__FormFieldBackgroundColor: $white;
+$dialog__FormFieldTextColor: $gray-900;
+$dialog__FormFieldErrorColor: red;
+$dialog__FormFieldErrorBackgroundColor: $gray-200;
+
+$dialog__Border: dashed 2px $brand-400;
+$dialog__DragOverBorder: dashed 2px $brand-200;
+$dialog__BorderRadius: 20px;
+
+/***********************
+* button
+***********************/
+
+$button__TextColor: $dialog__TextColor;
+$button__BackgroundColor: transparent;
+$button__Border: 1px solid var(--pwv-brand-color-400);
+$button__BorderRadius: 8px;
+$button__Height: 42px;
+
+// hover state
+$button__HoverTextColor: $dialog__TextColor;
+$button__HoverBackgroundColor: transparent;
+$button__HoverBorder: 1px solid var(--pwv-brand-color-100);
+
+// active state
+$button__ActiveTextColor: $dialog__TextColor;
+$button__ActiveBackgroundColor: transparent;
+$button__ActiveBorder: 1px solid var(--pwv-brand-color-100);
+
+// focus state
+$button__FocusTextColor: $dialog__TextColor;
+$button__FocusBackgroundColor: transparent;
+$button__FocusBorder: 1px solid var(--pwv-brand-color-100);
+
+// disabled state
+$button__DisabledTextColor: $dialog__TextColor;
+$button__DisabledBackgroundColor: transparent;
+$button__DisabledBorder: solid 1px var(--pwv-brand-color-100);
+
+/***********************
+ * popup
+***********************/
+
+$popup__BackgroundColor: $gray-200;
+$popup__TextColor: $gray-900;
+$popup__DropShadow: var(--pwv-drop-shadow-3);
+$popup__FormFieldBackgroundColor: $white;
+$popup__FormFieldTextColor: $gray-900;
+$popup__FormFieldBorder: none;
+
+/***********************
+ * toolbar
+***********************/
+$toolbar__BackgroundColor: $gray-200;
+$toolbar__TextColor: $gray-900;
+$toolbar__TextMutedColor: var(--pwv-text-muted-color);
+
+// default state
+$toolbarItem__height: 50px;
+$toolbarItem__MinWidth: 50px;
+$toolbarItem__Margin: 4px;
+$toolbarItem__TextColor: $gray-800;
+$toolbarItem__BackgroundColor: $gray-200;
+$toolbarItem__Border: solid 1px transparent;
+$toolbarItem__BorderRadius: 0.5rem;
+$toolbarItem__IconSize: 1.12rem;
+$toolbarItem__CursorStyle: default;
+
+// hover state
+$toolbarItem__HoverTextColor: $brand-500;
+$toolbarItem__HoverBackgroundColor: $gray-200;
+$toolbarItem__HoverBorder: solid 1px transparent;
+
+// active state
+$toolbarItem__ActiveTextColor: $brand-500;
+$toolbarItem__ActiveBackgroundColor: $gray-200;
+$toolbarItem__ActiveBorder: solid 1px transparent;
+
+// focus state
+$toolbarItem__FocusTextColor: $gray-800;
+$toolbarItem__FocusBackgroundColor: $gray-200;
+$toolbarItem__FocusBorder: solid 1px transparent;
+
+// selected state
+$toolbarItem__SelectedTextColor: $brand-500;
+$toolbarItem__SelectedBackgroundColor: $gray-200;
+$toolbarItem__SelectedBorder: solid 1px transparent;
+
+// disabled state
+$toolbarItem__DisabledTextColor: var(--pwv-text-muted-color) !important;
+$toolbarItem__DisabledBackgroundColor: $gray-200;
+$toolbarItem__DisabledBorder: solid 1px transparent;
+
+/***********************
+ * dropdown
+***********************/
+
+$dropdownPanel__BackgroundColor: $gray-200;
+
+$dropdownItem__BackgroundColor: $gray-200;
+$dropdownItem__TextColor: $gray-800;
+$dropdownItem__Height: 42px;
+$dropdownItem__Margin: 4px;
+$dropdownItem__Border: solid 1px transparent;
+$dropdownItem__BorderRadius: 0.5rem;
+$dropdownItem__IconSize: 1rem;
+
+// hover state
+$dropdownItem__HoverTextColor: $brand-500;
+$dropdownItem__HoverBackgroundColor: $gray-100;
+$dropdownItem__HoverBorder: solid 1px transparent;
+
+/***********************
+ * scrollbar
+***********************/
+
+$scrollBar__Size: 4px;
+$scrollBar__ExpandedSize: 15px;
+$scrollBar__BackgroundColor: var(--pwv-ui-color-300);
+$scrollHandle__BackgroundColor: var(--pwv-ui-color-400);
+$scrollHandle__ActiveBackgroundColor: $brand-500;
+
+/***********************
+ * acroForms
+***********************/
+$acroForms__BackgroundColor: $white;
+$acroForms__Border: dotted 2px $selection-color;
+
+/***********************
+ * loader
+***********************/
+$loader-color-1: $loader-color;
+$loader-color-2: $loader-color;
+
+@import './mixins.scss';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/common/index';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/modules/index';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/index';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/index';

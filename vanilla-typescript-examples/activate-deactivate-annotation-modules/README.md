@@ -1,0 +1,1 @@
+# Activate / Deactivate annotation modules

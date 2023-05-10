@@ -1,0 +1,28 @@
+{
+  "name": "pdf-web-viewer-text-markup-annotation-preview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "webpack serve --port 4567",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@pdf-tools/four-heights-pdf-web-viewer": "^4.2.0-dev.13264",
+    "copy-webpack-plugin": "11.0.0",
+    "css-loader": "6.7.1",
+    "html-webpack-plugin": "5.5.0",
+    "pdf-lib": "1.17.1",
+    "sass": "1.54.9",
+    "sass-loader": "13.0.2",
+    "style-loader": "3.3.1",
+    "ts-loader": "9.4.2",
+    "typescript": "5.0.2",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.10.0"
+  }
+}

@@ -18,6 +18,8 @@ Explore and experiment with basic usage examples of NPM package [@pdf-tools/four
 
 ## List of Examples
 
+Click on a link to open example in CodeSandbox.
+
 - Hello world - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/hello-world)
 - Open and save documents - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/open-and-save-documents)
 - Custom theme - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-theme)

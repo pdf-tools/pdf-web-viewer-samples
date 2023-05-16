@@ -1,3 +1,3 @@
 # Current page shadow
 
-This example demonstrates how to customize the shadow effect on the currently viewed page in PDF Web Viewer. By using custom CSS styles, the PDF Web Viewer can be made to display the page shadow in a different color, or to remove the shadow effect altogether.
+This example shows how to customize the shadow effect for the pages rendered in PDF Web Viewer. You can define a page shadow for all visible pages as well as one for the current page.

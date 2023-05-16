@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@pdf-tools/four-heights-pdf-web-viewer": "^4.2.0-dev.13264",
+    "@pdf-tools/four-heights-pdf-web-viewer": "4.2.0",
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.7.1",
     "html-webpack-plugin": "5.5.0",

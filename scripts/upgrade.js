@@ -1,19 +1,52 @@
 import shell from 'shelljs';
-
-if (!shell.which('yarn')) throw new Error('Yarn not found. Yarn is required for this script to run.');
+import fs from 'fs';
+import path from 'path';
 
 const branchName = process.argv[2];
 const packageVersion = process.argv[3];
 
-if (!branchName) throw new Error('Please provide branch name as first argument in order to update README.');
-if (!packageVersion) throw new Error('Please provide new package version as second argument in order to update examples.');
+if (!branchName)
+  throw new Error(
+    'Please provide branch name as first argument in order to update README.'
+  );
+if (!packageVersion)
+  throw new Error(
+    'Please provide new package version as second argument in order to update examples.'
+  );
 
-shell.sed('-i', 'tree/.*/', `tree/${branchName}/`, 'README.md');
+shell.sed('-i', /tree\/[^\/]*/, `tree/${branchName}`, 'README.md');
 
-const exampleDirectoryNames = shell.ls("-d", "example-*");
+const examplesRootDirectories = ['vanilla-typescript-examples'];
+const exampleDirectories = [];
 
-exampleDirectoryNames.forEach((exampleDirectoryName) => {
-    shell.cd(exampleDirectoryName);
-    shell.exec(`yarn upgrade @pdf-tools/four-heights-pdf-web-viewer@${packageVersion}`);
-    shell.cd('..');
+for (const exampleRootDirectory of examplesRootDirectories) {
+  for (const exampleDirectory of findExampleDirectoriesRecursive(
+    exampleRootDirectory
+  )) {
+    exampleDirectories.push(exampleDirectory);
+  }
+}
+
+const rootDirectory = process.cwd();
+
+exampleDirectories.forEach((exampleDirectory) => {
+  shell.cd(exampleDirectory);
+  shell.echo(`\n=== Updating example in directory ${exampleDirectory} ===\n`);
+  shell.exec(
+    `npm install @pdf-tools/four-heights-pdf-web-viewer@${packageVersion} --save --save-exact`
+  );
+  shell.cd(rootDirectory);
 });
+
+function* findExampleDirectoriesRecursive(dir) {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  for (const file of files) {
+    if (file.isDirectory() && file.name !== 'node_modules') {
+      yield* findExampleDirectoriesRecursive(path.join(dir, file.name));
+    } else {
+      if (file.name === 'package.json') {
+        yield dir;
+      }
+    }
+  }
+}

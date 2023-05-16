@@ -1,0 +1,25 @@
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+.document-list {
+  .document-list-heading {
+    font-weight: normal;
+    padding-left: 10px;
+  }
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &.open {
+    display: block;
+  }
+}

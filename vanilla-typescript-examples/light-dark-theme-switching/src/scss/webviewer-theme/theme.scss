@@ -1,0 +1,161 @@
+$toolbar-bg: var(--pwv-ui-color-100);
+$toolbar-hoverBg: var(--pwv-ui-color-200);
+
+/***********************
+ * viewer
+ ***********************/
+$viewer__BackgroundColor: var(--pwv-ui-color-200);
+$viewer__TextColor: var(--pwv-text-color);
+$viewer__FontSize: inherit;
+$viewer__FontFamily: inherit;
+
+$viewer__DocumentBackgroundColor: var(--pwv-ui-color-200);
+$viewer__DocumentBusyIndicatorColor: var(--pwv-brand-color-500);
+
+/***********************
+ * dialog
+ ***********************/
+$modal__BackgroundColor: var(--pwv-brand-color-500);
+
+$dialog__BackgroundColor: var(--pwv-brand-color-500);
+$dialog__TextColor: var(--pwv-text-contrast-color);
+
+$dialog__FormFieldBackgroundColor: var(--pwv-text-contrast-color);
+$dialog__FormFieldTextColor: var(--pwv-text-color);
+$dialog__FormFieldErrorColor: red;
+$dialog__FormFieldErrorBackgroundColor: var(--pwv-ui-color-200);
+
+$dialog__Border: dashed 2px var(--pwv-brand-color-400);
+$dialog__DragOverBorder: dashed 2px var(--pwv-brand-color-200);
+$dialog__BorderRadius: 20px;
+
+/***********************
+* button
+***********************/
+
+$button__TextColor: $dialog__TextColor;
+$button__BackgroundColor: transparent;
+$button__Border: 1px solid var(--pwv-brand-color-400);
+$button__BorderRadius: 8px;
+$button__Height: 42px;
+
+// hover state
+$button__HoverTextColor: $dialog__TextColor;
+$button__HoverBackgroundColor: transparent;
+$button__HoverBorder: 1px solid var(--pwv-brand-color-100);
+
+// active state
+$button__ActiveTextColor: $dialog__TextColor;
+$button__ActiveBackgroundColor: transparent;
+$button__ActiveBorder: 1px solid var(--pwv-brand-color-100);
+
+// focus state
+$button__FocusTextColor: $dialog__TextColor;
+$button__FocusBackgroundColor: transparent;
+$button__FocusBorder: 1px solid var(--pwv-brand-color-100);
+
+// disabled state
+$button__DisabledTextColor: $dialog__TextColor;
+$button__DisabledBackgroundColor: transparent;
+$button__DisabledBorder: solid 1px var(--pwv-brand-color-100);
+
+/***********************
+* popup
+***********************/
+
+$popup__BackgroundColor: var(--pwv-ui-color-200);
+$popup__TextColor: var(--pwv-text-color);
+$popup__DropShadow: var(--pwv-drop-shadow-3);
+$popup__FormFieldBackgroundColor: var(--pwv-text-contrast-color);
+$popup__FormFieldTextColor: var(--pwv-text-color);
+$popup__FormFieldBorder: none;
+
+/***********************
+ * toolbar
+ ***********************/
+$toolbar__BackgroundColor: $toolbar-bg;
+$toolbar__TextColor: var(--pwv-text-color);
+$toolbar__TextMutedColor: var(--pwv-text-muted-color);
+
+// default state
+$toolbarItem__height: 42px;
+$toolbarItem__MinWidth: 42px;
+$toolbarItem__Margin: 4px;
+$toolbarItem__TextColor: var(--pwv-text-color);
+$toolbarItem__BackgroundColor: $toolbar-bg;
+$toolbarItem__Border: solid 1px transparent;
+$toolbarItem__BorderRadius: 0.5rem;
+$toolbarItem__IconSize: 1rem;
+$toolbarItem__CursorStyle: default;
+
+// hover state
+$toolbarItem__HoverTextColor: var(--pwv-text-color);
+$toolbarItem__HoverBackgroundColor: $toolbar-hoverBg;
+$toolbarItem__HoverBorder: solid 1px transparent;
+
+// active state
+$toolbarItem__ActiveTextColor: var(--pwv-brand-color-700);
+$toolbarItem__ActiveBackgroundColor: $toolbar-hoverBg;
+$toolbarItem__ActiveBorder: solid 1px transparent;
+
+// focus state
+$toolbarItem__FocusTextColor: var(--pwv-text-color);
+$toolbarItem__FocusBackgroundColor: $toolbar-hoverBg;
+$toolbarItem__FocusBorder: solid 1px transparent;
+
+// selected state
+$toolbarItem__SelectedTextColor: var(--pwv-brand-color-500);
+$toolbarItem__SelectedBackgroundColor: $toolbar-hoverBg;
+$toolbarItem__SelectedBorder: solid 1px transparent;
+
+// disabled state
+$toolbarItem__DisabledTextColor: var(--pwv-text-muted-color) !important;
+$toolbarItem__DisabledBackgroundColor: $toolbar-bg;
+$toolbarItem__DisabledBorder: solid 1px transparent;
+
+/***********************
+ * dropdown
+ ***********************/
+
+$dropdownPanel__BackgroundColor: $toolbar-bg;
+
+$dropdownItem__BackgroundColor: $toolbar-bg;
+$dropdownItem__TextColor: var(--pwv-text-color);
+$dropdownItem__Height: 42px;
+$dropdownItem__Margin: 4px;
+$dropdownItem__Border: solid 1px transparent;
+$dropdownItem__BorderRadius: 0.5rem;
+$dropdownItem__IconSize: 1rem;
+
+// hover state
+$dropdownItem__HoverTextColor: var(--pwv-brand-color-600);
+$dropdownItem__HoverBackgroundColor: var(--pwv-ui-color-200);
+$dropdownItem__HoverBorder: solid 1px transparent;
+
+/***********************
+ * scrollbar
+ ***********************/
+
+$scrollBar__Size: 4px;
+$scrollBar__ExpandedSize: 15px;
+$scrollBar__BackgroundColor: var(--pwv-ui-color-300);
+$scrollHandle__BackgroundColor: var(--pwv-ui-color-400);
+$scrollHandle__ActiveBackgroundColor: var(--pwv-brand-color-500);
+
+/***********************
+ * acroForms
+ ***********************/
+$acroForms__BackgroundColor: var(--pwv-text-contrast-color);
+$acroForms__Border: dotted 2px var(--pwv-selection-color);
+
+/***********************
+ * loader
+ ***********************/
+$loader-color-1: var(--pwv-ui-color-300);
+$loader-color-2: var(--pwv-ui-color-400);
+
+@import './mixins.scss';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/common/_index.scss';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/modules/_index.scss';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/_index.scss';
+@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/_index.scss';

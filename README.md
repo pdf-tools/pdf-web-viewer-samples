@@ -34,7 +34,7 @@ Click on a link to open example in CodeSandbox.
 - Annotation custom permissions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/annotation-custom-permissions)
 - Custom text stamps - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-text-stamps)
 - Activate / Deactivate annotation modules - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/activate-deactivate-annotation-modules)
-- Text markup annotation preview - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/text-markup-annotation-oreview)
+- Text markup annotation preview - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/text-markup-annotation-preview)
 - Custom toolbar - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-toolbar)
 - License error handling - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/license-error-handling)
 - Autosave - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/autosave)

@@ -19,6 +19,7 @@
     "build-clean": "rimraf build"
   },
   "dependencies": {
+    "@pdf-tools/four-heights-pdf-web-viewer": "4.2.0",
     "@angular/animations": "^13.3.12",
     "@angular/common": "^13.3.12",
     "@angular/compiler": "^13.3.12",

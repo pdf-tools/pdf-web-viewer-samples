@@ -35,13 +35,13 @@
               },
               {
                 "glob": "**/*",
-                "input": "../../../node_modules/@pdf-tools/four-heights-pdf-web-viewer/build/pdfwebviewer",
+                "input": "node_modules/@pdf-tools/four-heights-pdf-web-viewer/pdfwebviewer",
                 "output": "./pdfwebviewer"
               }
             ],
             "styles": [
               "src/styles.scss",
-              "../../../node_modules/@pdf-tools/four-heights-pdf-web-viewer/build/scss/themes/pdf-web-viewer.scss"
+              "node_modules/@pdf-tools/four-heights-pdf-web-viewer/scss/themes/pdf-web-viewer.scss"
             ],
             "scripts": []
           },

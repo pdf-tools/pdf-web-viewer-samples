@@ -1,18 +1,20 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const pdfwebviewerDir = path.join(
-  path.dirname(require.resolve('@pdf-tools/four-heights-pdf-web-viewer')),
-  '../pdfwebviewer'
-)
+const webViewerNodeModluesDir = path.dirname(
+  require.resolve('@pdf-tools/four-heights-pdf-web-viewer')
+);
+
+const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');
+const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc');
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'js/[name].[contenthash:8].js',
-    publicPath: '',
+    publicPath: ''
   },
   mode: 'development',
   devtool: 'cheap-module-source-map',
@@ -26,32 +28,37 @@ module.exports = {
           options: {
             cacheDirectory: true,
             cacheCompression: false,
-            envName: 'development',
-          },
-        },
-      },
-    ],
+            envName: 'development'
+          }
+        }
+      }
+    ]
   },
   devServer: {
-    port: 2213,
+    port: 2213
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'index.html'),
+      template: path.resolve(__dirname, 'src', 'index.html')
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: '**/*',
-          to: 'pdfwebviewer',
-          context: pdfwebviewerDir,
+          to: './',
+          context: 'static'
+        },
+        {
+          from: '*.pdf',
+          to: './',
+          context: webViewerDocDir
         },
         {
           from: '**/*',
-          to: './',
-          context: 'static',
-        },
-      ],
-    }),
-  ],
-}
+          to: 'pdfwebviewer',
+          context: webViewerAssetsDir
+        }
+      ]
+    })
+  ]
+};

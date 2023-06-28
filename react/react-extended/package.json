@@ -1,19 +1,12 @@
 {
   "name": "@pdf-tools/pdf-web-viewer-examples-react-extended",
-  "version": "4.3.0",
-  "private": true,
+  "version": "1.0.0",
   "description": "",
-  "author": {
-    "name": "PDF Tools AG",
-    "email": "pdfsales@pdf-tools.com",
-    "url": "https://www.pdf-tools.com/"
-  },
-  "homepage": "https://www.pdf-tools.com/en/products/pdf-web-viewer/",
-  "license": "SEE LICENSE IN pdf-tools-license-v2.8_en.md",
+  "author": "",
+  "license": "MIT",
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack",
-    "build-clean": "rimraf build"
+    "dev": "webpack serve --port 4567",
+    "build": "webpack"
   },
   "dependencies": {
     "@pdf-tools/four-heights-pdf-web-viewer": "4.2.0",

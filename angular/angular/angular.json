@@ -85,7 +85,8 @@
               "browserTarget": "angular:build:production"
             },
             "development": {
-              "browserTarget": "angular:build:development"
+              "browserTarget": "angular:build:development",
+              "allowedHosts": [".csb.app"]
             }
           },
           "defaultConfiguration": "development"

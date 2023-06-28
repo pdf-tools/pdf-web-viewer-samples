@@ -11,13 +11,13 @@ This is an example for using [PDF Web Viewer](https://www.pdf-tools.com/products
 - Open this directory in a terminal and run `npm install`.
 - Add your license key in the license file `/scr/license.js`
   ```javascript
-  export default 'YOUR LICENSE KEY'
+  export default 'YOUR LICENSE KEY';
   ```
 
 ## Development Server
 
 - Open this directory in a terminal and run `npm run dev`
-- Open a browser and navigate to http://localhost:2213/
+- Open a browser and navigate to http://localhost:4567/
 
 ## Further Help
 

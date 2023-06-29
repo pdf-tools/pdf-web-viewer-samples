@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import PdfViewer from './PdfViewer'
+import PdfViewer from './PdfViewer';
 
 const Tabs = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #0d8ff2;
-`
+`;
 
 const NavList = styled.ul`
   box-sizing: border-box;
@@ -18,7 +18,7 @@ const NavList = styled.ul`
   height: 68px;
   background-color: #ffffff;
   max-width: calc(100vw - 260px);
-`
+`;
 
 const Tab = styled.li`
   display: flex;
@@ -40,13 +40,13 @@ const Tab = styled.li`
       visibility: visible;
     }
   }
-`
+`;
 
 const TabLabel = styled.span`
   padding: 12px 5px;
   white-space: nowrap;
   border-bottom: solid 3px transparent;
-`
+`;
 
 const CloseTabButton = styled.button`
   height: 20px;
@@ -65,7 +65,7 @@ const CloseTabButton = styled.button`
     height: 18px;
     fill: currentColor;
   }
-`
+`;
 
 const ViewerWrapper = styled.div`
   flex-grow: 1;
@@ -75,10 +75,10 @@ const ViewerWrapper = styled.div`
     css`
       display: none;
     `}
-`
+`;
 
 export default (props) => {
-  const { openDocuments, selectedDocument, onSelect, onClose } = props
+  const { openDocuments, selectedDocument, onSelect, onClose } = props;
 
   return (
     <Tabs>
@@ -87,14 +87,14 @@ export default (props) => {
           <Tab key={doc.url} selected={doc.url === selectedDocument}>
             <TabLabel
               onClick={() => {
-                onSelect(doc.url)
+                onSelect(doc.url);
               }}
             >
               {doc.name}
             </TabLabel>
             <CloseTabButton
               onClick={() => {
-                onClose(doc.url)
+                onClose(doc.url);
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -110,5 +110,5 @@ export default (props) => {
         </ViewerWrapper>
       ))}
     </Tabs>
-  )
-}
+  );
+};

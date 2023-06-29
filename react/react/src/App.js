@@ -1,37 +1,36 @@
-import { useState, UseState } from 'react'
-import { PdfPageLayoutMode } from '@pdf-tools/four-heights-pdf-web-viewer'
-import styled, { createGlobalStyle, css } from 'styled-components'
+import { useState, useMemo } from 'react';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
-import DefaultPdfViewer from './components/DefaultPdfViewer'
-import PdfViewerOptions from './components/PdfViewerOptions'
-import PdfViewerOpenUrl from './components/PdfViewerOpenUrl'
+import DefaultPdfViewer from './components/DefaultPdfViewer';
+import PdfViewerOptions from './components/PdfViewerOptions';
+import PdfViewerOpenUrl from './components/PdfViewerOpenUrl';
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-`
+`;
 
 const Wrapper = styled.div`
   height: 100vh;
-`
+`;
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   height: 68px;
   padding: 0 16px;
-`
+`;
 
 const Logo = styled.img`
   height: 32px;
-`
+`;
 
 const Viewer = styled.div`
   position: relative;
   height: calc(100vh - 68px);
-`
+`;
 
 const Nav = styled.div`
   display: grid;
@@ -39,7 +38,7 @@ const Nav = styled.div`
   grid-auto-columns: min-content;
   grid-gap: 10px;
   margin-left: 40px;
-`
+`;
 
 const TabButton = styled.button`
   border: none;
@@ -56,29 +55,26 @@ const TabButton = styled.button`
     css`
       background-color: #f0f0ef;
     `}
-`
+`;
 
 export default (props) => {
-  const [sample, setSample] = useState('default')
+  const [sample, setSample] = useState('default');
   function handleChangeSample(e) {
-    setSample(e.target.name)
+    setSample(e.target.name);
   }
 
-  function renderContent() {
+  const viewer = useMemo(() => {
     switch (sample) {
       case 'default':
-        return <DefaultPdfViewer />
-
+        return <DefaultPdfViewer />;
       case 'options':
-        return <PdfViewerOptions />
-
+        return <PdfViewerOptions />;
       case 'openUrl':
-        return <PdfViewerOpenUrl />
-
+        return <PdfViewerOpenUrl />;
       default:
-        return <DefaultPdfViewer />
+        return <DefaultPdfViewer />;
     }
-  }
+  }, [sample]);
 
   return (
     <Wrapper>
@@ -86,18 +82,30 @@ export default (props) => {
       <Header>
         <Logo src="./pdftools-logo.svg" />
         <Nav>
-          <TabButton name="default" selected={sample === 'default'} onClick={handleChangeSample}>
+          <TabButton
+            name="default"
+            selected={sample === 'default'}
+            onClick={handleChangeSample}
+          >
             Default
           </TabButton>
-          <TabButton name="options" selected={sample === 'options'} onClick={handleChangeSample}>
+          <TabButton
+            name="options"
+            selected={sample === 'options'}
+            onClick={handleChangeSample}
+          >
             Viewer Options
           </TabButton>
-          <TabButton name="openUrl" selected={sample === 'openUrl'} onClick={handleChangeSample}>
+          <TabButton
+            name="openUrl"
+            selected={sample === 'openUrl'}
+            onClick={handleChangeSample}
+          >
             Load PDF
           </TabButton>
         </Nav>
       </Header>
-      <Viewer>{renderContent()}</Viewer>
+      <Viewer>{viewer}</Viewer>
     </Wrapper>
-  )
-}
+  );
+};

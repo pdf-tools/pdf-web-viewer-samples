@@ -1,30 +1,30 @@
-import { useRef, useEffect } from 'react'
-import { PdfWebViewer } from '@pdf-tools/four-heights-pdf-web-viewer'
+import { useRef, useEffect } from 'react';
+import { PdfWebViewer } from '@pdf-tools/four-heights-pdf-web-viewer';
 
-import license from '../license'
+import license from '../license';
 
 const options = {
   viewer: {
     permissions: {
       allowFileDrop: false,
-      allowOpenFile: false,
-    },
-  },
-}
+      allowOpenFile: false
+    }
+  }
+};
 
 export default (props) => {
-  const { pdfDocument } = props
-  const viewerContainer = useRef()
+  const { pdfDocument } = props;
+  const viewerContainer = useRef();
 
   useEffect(() => {
-    const _viewer = new PdfWebViewer(viewerContainer.current, license, options)
+    const _viewer = new PdfWebViewer(viewerContainer.current, license, options);
     _viewer.addEventListener('appLoaded', () => {
-      _viewer.open({ uri: pdfDocument.url })
-    })
+      _viewer.open({ uri: pdfDocument.url });
+    });
     return () => {
-      _viewer.destroy()
-    }
-  }, [])
+      _viewer.destroy();
+    };
+  }, []);
 
-  return <div ref={viewerContainer} />
-}
+  return <div ref={viewerContainer} />;
+};

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react';
 import {
   PdfWebViewer,
   PdfPageLayoutMode,
@@ -10,13 +10,13 @@ import {
   PopupModule,
   ShapeAnnotationModule,
   ImageAnnotationModule,
-  StampAnnotationColor,
-} from '@pdf-tools/four-heights-pdf-web-viewer'
+  StampAnnotationColor
+} from '@pdf-tools/four-heights-pdf-web-viewer';
 
-import license from '../license'
+import license from '../license';
 
 export default (props) => {
-  const viewerContainer = useRef()
+  const viewerContainer = useRef();
 
   useEffect(() => {
     const options = {
@@ -29,26 +29,33 @@ export default (props) => {
             PdfPageLayoutMode.TWO_COLUMN_LEFT,
             PdfPageLayoutMode.TWO_COLUMN_RIGHT,
             PdfPageLayoutMode.TWO_PAGE_LEFT,
-            PdfPageLayoutMode.TWO_PAGE_RIGHT,
-          ],
+            PdfPageLayoutMode.TWO_PAGE_RIGHT
+          ]
         },
         permissions: {
           allowFileDrop: true,
           allowOpenFile: true,
           allowSaveFile: true,
           enableSearch: true,
-          allowPrinting: false,
+          allowPrinting: false
         },
         sidebar: {
           annotationNavigation: true,
           outlineNavigation: true,
-          thumbnailNavigation: true,
-        },
+          thumbnailNavigation: true
+        }
       },
       annotation: {
         colors: {
           highlightColors: ['#2ADB1A', '#FFEA02', '#FF7F1F', '#FF2882', '#008AD1'],
-          foregroundColors: ['#323232', '#FFFFFF', '#FFEA02', '#2ADB1A', '#0066CC', '#D82F32'],
+          foregroundColors: [
+            '#323232',
+            '#FFFFFF',
+            '#FFEA02',
+            '#2ADB1A',
+            '#0066CC',
+            '#D82F32'
+          ],
           backgroundColors: [
             'transparent',
             '#FFFFFF',
@@ -57,11 +64,11 @@ export default (props) => {
             '#FFEA02',
             '#D82F32',
             '#0066CC',
-            '#ff000055',
+            '#ff000055'
           ],
           defaultHighlightColor: '#FFEA02',
           defaultBackgroundColor: '#FCF5E2',
-          defaultForegroundColor: '#323232',
+          defaultForegroundColor: '#323232'
         },
         stamps: [
           { text: 'APPROVED', color: StampAnnotationColor.GREEN },
@@ -75,8 +82,8 @@ export default (props) => {
           { text: 'VOID', color: StampAnnotationColor.RED },
           { text: 'FOR COMMENT', color: StampAnnotationColor.BLUE },
           { text: 'PRELIMINARY RESULTS', color: StampAnnotationColor.BLUE },
-          { text: 'INFORMATION ONLY', color: StampAnnotationColor.BLUE },
-        ],
+          { text: 'INFORMATION ONLY', color: StampAnnotationColor.BLUE }
+        ]
       },
       modules: [
         PopupModule,
@@ -86,14 +93,16 @@ export default (props) => {
         HighlightAnnotationModule,
         StampAnnotationModule,
         ShapeAnnotationModule,
-        ImageAnnotationModule,
-      ],
-    }
-    let _viewer = new PdfWebViewer(viewerContainer.current, license, options)
-    return () => {
-      _viewer.destroy()
-    }
-  }, [])
+        ImageAnnotationModule
+      ]
+    };
 
-  return <div ref={viewerContainer} />
-}
+    const _viewer = new PdfWebViewer(viewerContainer.current, license, options);
+
+    return () => {
+      _viewer.destroy();
+    };
+  }, []);
+
+  return <div ref={viewerContainer} />;
+};

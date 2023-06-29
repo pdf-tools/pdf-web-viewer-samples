@@ -1,1 +1,1 @@
-export default '' // your license key
+export default ''; // your license key

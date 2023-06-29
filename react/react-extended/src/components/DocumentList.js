@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 const NavigationPane = styled.div`
   background-color: #0d8ff2;
   color: #ffffff;
-`
+`;
 
 const Logo = styled.div`
   display: flex;
@@ -14,13 +14,13 @@ const Logo = styled.div`
     margin-left: 16px;
     height: 32px;
   }
-`
+`;
 
 const DocumentList = styled.ul`
   list-style: none;
   padding: 0;
   margin-top: 0px;
-`
+`;
 const DocumentListItem = styled.li`
   display: flex;
   align-items: center;
@@ -41,10 +41,10 @@ const DocumentListItem = styled.li`
         color: #ffffff;
       }
     `}
-`
+`;
 
 export default (props) => {
-  const { documents, selectedDocument, onSelect } = props
+  const { documents, selectedDocument, onSelect } = props;
   return (
     <NavigationPane>
       <Logo>
@@ -56,7 +56,7 @@ export default (props) => {
             key={doc.url}
             selected={doc.url === selectedDocument}
             onClick={() => {
-              onSelect(doc.url)
+              onSelect(doc.url);
             }}
           >
             {doc.name}
@@ -64,5 +64,5 @@ export default (props) => {
         ))}
       </DocumentList>
     </NavigationPane>
-  )
-}
+  );
+};

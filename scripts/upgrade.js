@@ -16,7 +16,7 @@ if (!packageVersion)
 
 shell.sed('-i', /tree\/[^\/]*/, `tree/${branchName}`, 'README.md');
 
-const examplesRootDirectories = ['vanilla-typescript-examples'];
+const examplesRootDirectories = ['vanilla-typescript-examples', 'react', 'angular'];
 const exampleDirectories = [];
 
 for (const exampleRootDirectory of examplesRootDirectories) {

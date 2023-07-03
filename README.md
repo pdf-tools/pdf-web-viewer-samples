@@ -20,25 +20,45 @@ Explore and experiment with basic usage examples of NPM package [@pdf-tools/four
 
 Click on a link to open example in CodeSandbox.
 
-- Hello world - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/hello-world)
-- Open and save documents - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/open-and-save-documents)
-- Custom theme - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-theme)
-- Light / Dark theme switching - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/light-dark-theme-switching)
-- Current page shadow - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/current-page-shadow)
-- PDF Web Viewer options - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/pdf-web-viewer-options)
-- PDF Web Viewer ViewOptions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/pdf-web-viewer-view-options)
-- PDF Web Viewer RenderOptions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/pdf-web-viewer-render-options)
-- Custom buttons - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-buttons)
-- Custom keyboard shortcuts - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-keyboard-shortcuts)
-- Save annotations as FDF - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/save-annotations-as-fdf)
-- Annotation custom permissions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/annotation-custom-permissions)
-- Custom text stamps - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-text-stamps)
-- Activate / Deactivate annotation modules - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/activate-deactivate-annotation-modules)
-- Text markup annotation preview - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/text-markup-annotation-preview)
-- Custom toolbar - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/custom-toolbar)
-- License error handling - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/license-error-handling)
-- Autosave - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/autosave)
-- Open document in popup - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/vanilla-typescript-examples/open-document-in-popup)
-- React - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/react/react)
-- React extended - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/react/extended)
-- Angular - [Angular](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/angular/angular)
+### Getting started
+
+- Hello world - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/hello-world)
+- PDF Web Viewer options - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/pdf-web-viewer-options)
+- License error handling - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/license-error-handling)
+
+### UI customization
+
+- Autosave - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/autosave)
+- Custom keyboard shortcuts - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-keyboard-shortcuts)
+- Custom buttons - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-buttons)
+- Custom toolbar - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-toolbar)
+
+### Themes & styling
+
+- Light / Dark theme switching - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/light-dark-theme-switching)
+- Custom theme - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-theme)
+
+### Document rendering & viewing
+
+- Open and save documents - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/open-and-save-documents)
+- Open document in popup - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/open-document-in-popup)
+- PDF Web Viewer ViewOptions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/pdf-web-viewer-view-options)
+- PDF Web Viewer RenderOptions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/pdf-web-viewer-render-options)
+
+### Annotations
+
+- Activate / Deactivate annotation modules - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/activate-deactivate-annotation-modules)
+- Annotation custom permissions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/annotation-custom-permissions)
+- Text markup annotation preview - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/text-markup-annotation-preview)
+- Save annotations as FDF - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/save-annotations-as-fdf)
+- Custom text stamps - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-text-stamps)
+
+### Document layout & styling
+
+- Current page shadow - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/current-page-shadow)
+
+### Library & framework integration
+
+- React - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/react/react)
+- React extended - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/react/extended)
+- Angular - [Angular](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/angular/angular)

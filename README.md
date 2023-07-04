@@ -22,7 +22,7 @@ Click on a link to open example in CodeSandbox.
 
 ### Getting started
 
-- Hello world - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/hello-world)
+- View PDF - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/view-pdf)
 - PDF Web Viewer options - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/pdf-web-viewer-options)
 - License error handling - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/license-error-handling)
 

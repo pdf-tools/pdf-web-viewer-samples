@@ -13,7 +13,7 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
       user: 'John Doe'
     },
     customButtons: {
-      informationbar: [
+      documentbar: [
         {
           text: 'Switch theme',
           icon: '/images/light.svg',

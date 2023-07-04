@@ -23,14 +23,14 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
   },
   // Remove unused modules from the list
   modules: [
+    TextAnnotationModule,
     InkAnnotationModule,
     EraserModule,
+    // FreetextAnnotationModule,
     HighlightAnnotationModule,
-    ImageAnnotationModule,
-    ShapeAnnotationModule,
     StampAnnotationModule,
-    FreetextAnnotationModule,
-    TextAnnotationModule
+    ShapeAnnotationModule,
+    ImageAnnotationModule
   ]
 };
 

@@ -26,14 +26,14 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
           text: 'Download PDF',
           icon: '/images/download.svg',
           onClick: function () {
-            console.log('Download PDF button clicked');
+            alert('Download PDF button clicked');
           }
         },
         {
           text: 'Send as Email',
           icon: '/images/envelope.svg',
           onClick: function () {
-            console.log('Send as Email button clicked');
+            alert('Send as Email button clicked');
           }
         }
       ],
@@ -42,7 +42,7 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
           text: 'Close document',
           icon: '/images/times.svg',
           onClick: () => {
-            console.log('Close button clicked');
+            alert('Close button clicked');
           }
         }
       ],
@@ -51,7 +51,7 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
           text: 'Add QR-Code',
           icon: '/images/qrcode.svg',
           onClick: () => {
-            console.log('QR-Code button clicked');
+            alert('QR-Code button clicked');
           }
         }
       ]

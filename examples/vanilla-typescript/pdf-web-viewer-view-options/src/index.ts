@@ -24,12 +24,13 @@ pdfViewer.addEventListener('appLoaded', () => {
     // initialPageNumber: 5,
     // initialZoom: 0.5,
 
-    // available PdfFitModes:
+    // Available PdfFitModes:
     // PdfFitMode.FIT_PAGE
     // PdfFitMode.FIT_PAGE
     // PdfFitMode.NONE
     initialFitMode: PdfFitMode.FIT_WIDTH,
-    // available PdfPageLayoutModes:
+
+    // Available PdfPageLayoutModes:
     // SINGLE_PAGE
     // ONE_COLUMN
     // TWO_COLUMN_LEFT

@@ -152,5 +152,5 @@ Options used in the example:
 - `viewer.forms.enabled` `boolean`  
   Toggles support for filling in form fields.
 
-- viewer.modules `CanvasModuleClass[]`  
+- `viewer.modules` `CanvasModuleClass[]`  
   Enables or disables available annotation modules.

@@ -88,20 +88,13 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
     },
     callbacks: {
       // onOpenFileButtonClicked: () => {},
-      // onSaveFileButtonClicked: () => {}
+      // onSaveFileButtonClicked: () => {},
+      // onFileButtonClicked: () => {},
     }
   },
   annotation: {
     colors: {
       highlightColors: ['#2ADB1A', '#FFEA02', '#FF7F1F', '#FF2882', '#008AD1'],
-      foregroundColors: [
-        '#323232',
-        '#FFFFFF',
-        '#FFEA02',
-        '#2ADB1A',
-        '#0066CC',
-        '#D82F3277'
-      ],
       backgroundColors: [
         '#FFFFFF',
         '#FCF5E2',
@@ -109,6 +102,14 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
         '#FFEA02',
         '#D82F32',
         '#0066CC77'
+      ],
+      foregroundColors: [
+        '#323232',
+        '#FFFFFF',
+        '#FFEA02',
+        '#2ADB1A',
+        '#0066CC',
+        '#D82F3277'
       ],
       defaultHighlightColor: '#FFEA02',
       defaultBackgroundColor: '#FCF5E2',

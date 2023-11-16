@@ -16,15 +16,10 @@ if (!packageVersion)
 
 shell.sed('-i', /tree\/[^\/]*/, `tree/${branchName}`, 'README.md');
 
-const examplesRootDirectories = ['vanilla-typescript-examples'];
 const exampleDirectories = [];
 
-for (const exampleRootDirectory of examplesRootDirectories) {
-  for (const exampleDirectory of findExampleDirectoriesRecursive(
-    exampleRootDirectory
-  )) {
-    exampleDirectories.push(exampleDirectory);
-  }
+for (const exampleDirectory of findExampleDirectoriesRecursive('examples')) {
+  exampleDirectories.push(exampleDirectory);
 }
 
 const rootDirectory = process.cwd();

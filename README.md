@@ -60,5 +60,5 @@ Click on a link to open example in CodeSandbox.
 ### Library & framework integration
 
 - React - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/react/react)
-- React extended - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/react/extended)
+- React extended - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/react/react-extended)
 - Angular - [Angular](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/angular/angular)

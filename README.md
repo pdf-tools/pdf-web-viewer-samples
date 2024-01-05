@@ -52,6 +52,8 @@ Click on a link to open example in CodeSandbox.
 - Text markup annotation preview - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/text-markup-annotation-preview)
 - Save annotations as FDF - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/save-annotations-as-fdf)
 - Custom text stamps - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-text-stamps)
+- Custom stamps from images - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-stamps-from-images)
+- Custom stamps from PDF pages - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/v-4.2.0/examples/vanilla-typescript/custom-stamps-from-pdf-pages)
 
 ### Document layout & styling
 

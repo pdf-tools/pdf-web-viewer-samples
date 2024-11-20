@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@pdftools/pdf-web-viewer": "5.0.0",
+    "@pdftools/pdf-web-viewer": "5.1.1",
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.7.1",
     "html-webpack-plugin": "5.5.0",

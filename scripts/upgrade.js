@@ -28,7 +28,7 @@ exampleDirectories.forEach((exampleDirectory) => {
   shell.cd(exampleDirectory);
   shell.echo(`\n=== Updating example in directory ${exampleDirectory} ===\n`);
   shell.exec(
-    `npm install @pdf-tools/four-heights-pdf-web-viewer@${packageVersion} --save --save-exact`
+    `npm install @pdftools/pdf-web-viewer@${packageVersion} --save --save-exact`
   );
   shell.cd(rootDirectory);
 });

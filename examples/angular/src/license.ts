@@ -1,1 +1,1 @@
-export default ''; // your license key
+export default '<4H,V4,VIEWSDK,4GA2AGK1HMH730DE11H8K6EB3GPDQWHTP3H3NW3WTALP1F843NF0V0WQ2QW2MPHAS6>'; // your license key

@@ -6,7 +6,7 @@ import {
   ViewChild,
   EventEmitter,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { PdfWebViewer, FileType } from '@pdf-tools/four-heights-pdf-web-viewer';
 import license from '../../../license';
@@ -14,7 +14,7 @@ import license from '../../../license';
 @Component({
   selector: 'app-pdf-web-viewer',
   templateUrl: './pdf-web-viewer.component.html',
-  styleUrls: ['./pdf-web-viewer.component.scss'],
+  styleUrls: ['./pdf-web-viewer.component.scss']
 })
 export class PdfWebViewerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('viewerContainer') viewerContainer!: ElementRef;
@@ -62,6 +62,7 @@ export class PdfWebViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   private openDocument() {
+    this.pdfWebViewer?.close();
     if (this.viewerLoaded) {
       // convert the pdf document urls into absolute paths
       // the pdf document urls are defined as relative path but the viewer loads the documents relative to the location of the web assembly.
@@ -79,19 +80,19 @@ export class PdfWebViewerComponent implements AfterViewInit, OnDestroy {
     const options = {
       viewer: {
         general: {
-          user: this.author,
+          user: this.author
         },
         readOnly: this.readOnly,
         permissions: {
           allowFileDrop: false,
           allowOpenFile: true,
-          allowSaveFile: true,
+          allowSaveFile: true
         },
         callbacks: {
           onSaveFileButtonClicked: this.handleSaveButtonClicked,
-          onOpenFileButtonClicked: this.handleOpenButtonClicked,
-        },
-      },
+          onOpenFileButtonClicked: this.handleOpenButtonClicked
+        }
+      }
     };
 
     this.pdfWebViewer = new PdfWebViewer(

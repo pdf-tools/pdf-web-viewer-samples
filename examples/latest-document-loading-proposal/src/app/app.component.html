@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <div class="header">
+    <span style="margin-right: 10px">Select Document</span>
+    <div style="display: flex; flex-direction: column">
+      <button
+        *ngFor="let doc of documents; index as i"
+        (click)="selectedDocument = documents[i]"
+        style="user-select: none"
+      >
+        {{ doc.name }}
+      </button>
+    </div>
+  </div>
+  <div class="viewer">
+    <app-pdf-web-viewer [url]="selectedDocument.url"></app-pdf-web-viewer>
+  </div>
+</div>

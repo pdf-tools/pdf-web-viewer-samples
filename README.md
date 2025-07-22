@@ -63,4 +63,5 @@ Click on a link to open example in CodeSandbox.
 
 - React - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/4.3.4/examples/react/react)
 - React extended - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/4.3.4/examples/react/react-extended)
+- Vite + React - [React](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/4.3.4/examples/react/vite-react)
 - Angular - [Angular](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/4.3.4/examples/angular/angular)

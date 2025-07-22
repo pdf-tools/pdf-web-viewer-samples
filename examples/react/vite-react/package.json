@@ -1,0 +1,27 @@
+{
+  "name": "@pdf-tools/pdf-web-viewer-samples-react-vite-react",
+  "version": "1.0.0",
+  "description": "PDF Web Viewer sample with Vite + React",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4567",
+    "build": "tsc && vite build",
+    "preview": "vite preview --port 4567"
+  },
+  "dependencies": {
+    "@pdf-tools/four-heights-pdf-web-viewer": "4.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.15",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@types/styled-components": "^5.1.34",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-static-copy": "^1.0.6"
+  }
+}

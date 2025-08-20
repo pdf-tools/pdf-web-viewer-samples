@@ -9,7 +9,7 @@
     "preview": "vite preview --port 4567"
   },
   "dependencies": {
-    "@pdf-tools/four-heights-pdf-web-viewer": "4.3.4",
+    "@pdf-tools/four-heights-pdf-web-viewer": "4.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.19"

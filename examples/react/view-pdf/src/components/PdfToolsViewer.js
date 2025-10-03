@@ -12,8 +12,8 @@ export default () => {
 
   useEffect(() => {
     const initPdftoolsViewer = async () => {
-      const el = await PdfToolsViewer.init();
-      viewerContainer.current.append(el);
+      const viewer = new PdfToolsViewer();
+      await viewer.initialize({}, viewerContainer.current);
     };
 
     initPdftoolsViewer();

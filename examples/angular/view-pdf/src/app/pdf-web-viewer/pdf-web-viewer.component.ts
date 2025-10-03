@@ -19,7 +19,7 @@ export class PdfWebViewerComponent implements AfterViewInit {
   }
 
   async initPdfToolsViewer() {
-    this.pdfWebViewer = await PdfToolsViewer.init();
-    this.viewerContainer?.nativeElement.appendChild(this.pdfWebViewer);
+    this.pdfWebViewer = new PdfToolsViewer();
+    await this.pdfWebViewer.initialize({}, this.viewerContainer?.nativeElement as HTMLElement);
   }
 }

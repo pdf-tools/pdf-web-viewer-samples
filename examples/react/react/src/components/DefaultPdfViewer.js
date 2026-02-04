@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { PdfWebViewer } from '@pdf-tools/four-heights-pdf-web-viewer';
+import { PdfWebViewer } from '@pdftools/four-heights-pdf-web-viewer';
 
 import license from '../license';
 

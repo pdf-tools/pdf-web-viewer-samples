@@ -1,7 +1,7 @@
 import {
   PdfWebViewer,
   PdfWebViewerOptionsInterface
-} from '@pdf-tools/four-heights-pdf-web-viewer';
+} from '@pdftools/four-heights-pdf-web-viewer';
 
 import './styles.scss';
 
@@ -11,7 +11,10 @@ const options: Partial<PdfWebViewerOptionsInterface> = {
   viewer: {
     general: {
       user: 'John Doe'
-    }
+    },
+    permissions: {
+      allowPrinting: true,
+    },
   }
 };
 

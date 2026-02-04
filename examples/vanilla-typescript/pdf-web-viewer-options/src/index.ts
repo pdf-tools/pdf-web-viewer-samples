@@ -9,7 +9,7 @@ import {
   ShapeAnnotationModule,
   StampAnnotationModule,
   TextAnnotationModule
-} from '@pdf-tools/four-heights-pdf-web-viewer';
+} from '@pdftools/four-heights-pdf-web-viewer';
 
 import './styles.scss';
 

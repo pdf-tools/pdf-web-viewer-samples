@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webViewerNodeModluesDir = path.dirname(
-  require.resolve('@pdf-tools/four-heights-pdf-web-viewer')
+  require.resolve('@pdftools/four-heights-pdf-web-viewer')
 );
 
 const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');

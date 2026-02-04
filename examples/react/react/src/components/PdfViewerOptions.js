@@ -11,7 +11,7 @@ import {
   ShapeAnnotationModule,
   ImageAnnotationModule,
   StampAnnotationColor
-} from '@pdf-tools/four-heights-pdf-web-viewer';
+} from '@pdftools/four-heights-pdf-web-viewer';
 
 import license from '../license';
 

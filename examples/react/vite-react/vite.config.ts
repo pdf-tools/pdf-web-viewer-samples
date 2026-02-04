@@ -13,14 +13,14 @@ export default defineConfig({
         {
           src: path.resolve(
             path.dirname(fileURLToPath(import.meta.url)),
-            'node_modules/@pdf-tools/four-heights-pdf-web-viewer/pdfwebviewer/**/*'
+            'node_modules/@pdftools/four-heights-pdf-web-viewer/pdfwebviewer/**/*'
           ),
           dest: 'pdfwebviewer'
         },
         {
           src: path.resolve(
             path.dirname(fileURLToPath(import.meta.url)),
-            'node_modules/@pdf-tools/four-heights-pdf-web-viewer/doc/*.pdf'
+            'node_modules/@pdftools/four-heights-pdf-web-viewer/doc/*.pdf'
           ),
           dest: ''
         },

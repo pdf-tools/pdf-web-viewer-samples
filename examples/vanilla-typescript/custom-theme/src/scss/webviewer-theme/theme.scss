@@ -184,7 +184,7 @@ $loader-color-1: $loader-color;
 $loader-color-2: $loader-color;
 
 @import './mixins.scss';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/common/index';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/modules/index';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/index';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/index';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/common/index';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/modules/index';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/index';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/index';

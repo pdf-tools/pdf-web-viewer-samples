@@ -186,8 +186,8 @@ $loader-color-2: var(--pwv-ui-color-400);
 
 $toolbarWidth: 100px;
 
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/themes/default/_mixins.scss';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/common/_index.scss';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/modules/_index.scss';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/_index.scss';
-@import '@pdf-tools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/_index.scss';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/themes/default/_mixins.scss';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/common/_index.scss';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/modules/_index.scss';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/pdf-viewer-canvas/_index.scss';
+@import '@pdftools/four-heights-pdf-web-viewer/scss/pdf-web-viewer/_index.scss';

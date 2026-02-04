@@ -8,7 +8,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { PdfWebViewer, FileType } from '@pdf-tools/four-heights-pdf-web-viewer';
+import { PdfWebViewer, FileType } from '@pdftools/four-heights-pdf-web-viewer';
 import license from '../../../license';
 
 @Component({

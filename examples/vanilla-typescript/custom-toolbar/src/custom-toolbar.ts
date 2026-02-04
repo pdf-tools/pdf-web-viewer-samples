@@ -2,7 +2,7 @@ import {
   PdfFitMode,
   PdfPageLayoutMode,
   SearchOptions
-} from '@pdf-tools/four-heights-pdf-web-viewer';
+} from '@pdftools/four-heights-pdf-web-viewer';
 
 /**
  * Custom toolbar example showcases implementation of custom toolbar for PDF Web Viewer.

@@ -4,7 +4,7 @@ import {
   PdfWebViewer,
   PdfWebViewerOptionsInterface,
   SearchOptions
-} from '@pdf-tools/four-heights-pdf-web-viewer';
+} from '@pdftools/four-heights-pdf-web-viewer';
 import CustomToolbar, {
   CustomToolbarCallbacks,
   CustomToolbarOptions

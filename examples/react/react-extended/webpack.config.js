@@ -7,7 +7,7 @@ const webViewerNodeModluesDir = path.dirname(
 );
 
 const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');
-const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc');
+const samplesStaticDir = path.resolve(__dirname, '../../../static');
 
 module.exports = {
   entry: './src/index.js',
@@ -49,9 +49,9 @@ module.exports = {
           context: 'static'
         },
         {
-          from: '*.pdf',
+          from: '**/*',
           to: './',
-          context: webViewerDocDir
+          context: samplesStaticDir
         },
         {
           from: '**/*',

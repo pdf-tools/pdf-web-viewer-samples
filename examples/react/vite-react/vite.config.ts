@@ -20,7 +20,7 @@ export default defineConfig({
         {
           src: path.resolve(
             path.dirname(fileURLToPath(import.meta.url)),
-            'node_modules/@pdftools/four-heights-pdf-web-viewer/doc/*.pdf'
+            '../../../static/**/*'
           ),
           dest: ''
         },

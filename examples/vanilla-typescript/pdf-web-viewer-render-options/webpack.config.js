@@ -7,7 +7,7 @@ const webViewerNodeModluesDir = path.dirname(
 );
 
 const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');
-const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc');
+const samplesStaticDir = path.resolve(__dirname, '../../../static');
 
 module.exports = {
   entry: './src/index.ts',
@@ -48,9 +48,9 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: '*.pdf',
+          from: '**/*',
           to: './',
-          context: webViewerDocDir
+          context: samplesStaticDir
         },
         {
           from: '**/*',

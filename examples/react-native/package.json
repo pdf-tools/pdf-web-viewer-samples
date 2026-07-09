@@ -12,7 +12,7 @@
   "dependencies": {
     "@dr.pogodin/react-native-fs": "^2.38.2",
     "@dr.pogodin/react-native-static-server": "^0.26.2",
-    "@pdftools/pdf-web-viewer": "5.15.1",
+    "@pdftools/pdf-web-viewer": "5.17.0",
     "expo": "~54.0.33",
     "expo-file-system": "~19.0.22",
     "expo-status-bar": "~3.0.9",

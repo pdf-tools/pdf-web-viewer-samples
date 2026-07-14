@@ -1,65 +1,30 @@
-import {
-  AnnotationFilterCallback,
-  FileType,
-  PdfItemType,
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-import './styles.scss';
+async function init() {
+  const container = document.getElementById('viewer-container')!;
+  const viewer = new PdfToolsViewer();
+  await viewer.initialize({}, container);
 
-const timeOpened = new Date();
-const user = 'John Doe';
-
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    general: {
-      user: user
-    },
-    callbacks: {
-      onSaveFileButtonClicked: handleSaveDocument
-    }
-  }
-};
-
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
-
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
-
-// Annotation filter examples
-const annotationFilters: Record<string, AnnotationFilterCallback> = {
-  // Save only sticky note annotations
-  stickyNotes: (annotation) => annotation.itemType === PdfItemType.TEXT,
-
-  // Save all annotations from the current user
-  currentUser: (annotation) => annotation.author === user,
-
-  // Save only modified annotation
-  modifiedAnnotations: (annotation) =>
-    annotation.creationDate &&
-    annotation.creationDate < timeOpened &&
-    annotation.modificationDate &&
-    annotation.modificationDate > timeOpened,
-
-  // Save only new annotations
-  newAnnotations: (annotation) =>
-    annotation.creationDate && annotation.creationDate > timeOpened,
-
-  // Save new and modified annotation
-  newAndModifiedAnnotations: (annotation) =>
-    annotation.modificationDate && annotation.modificationDate > timeOpened
-};
-
-async function handleSaveDocument() {
-  const fdfData = await pdfViewer.save({
-    fileType: FileType.Fdf,
-    // Optionally provide annotation filter
-    annotationFilter: annotationFilters.stickyNotes
+  // Option 1: Use the `save` method to save annotations as FDF
+  viewer.overrideButtonBehavior('save-button', 'click', async () => {
+    const blob = await viewer.document.save({ saveAsFdf: true });                 
+    const file = new File([blob], 'form-data.fdf', { type: 'application/fdf' });  
+                                                                                  
+    // Create download link                                                       
+    const url = URL.createObjectURL(file);                                        
+    const link = document.createElement('a');                                     
+    link.href = url;                                                              
+    link.download = 'form-data.fdf';                                              
+    link.click();                                                                 
+    URL.revokeObjectURL(url); 
   });
 
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' }, [{ data: fdfData }]);
+  // Option 2: Use the `download` method to save annotations as FDF
+  // viewer.overrideButtonBehavior('save-button', 'click', () => {
+  //   viewer.document.download('example.fdf', {
+  //     'saveAsFdf': true,
+  //   });
+  // });
 }
+
+init();

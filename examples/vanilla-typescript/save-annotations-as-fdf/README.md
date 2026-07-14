@@ -1,3 +1,7 @@
 # Save annotations as FDF
 
-This example demonstrates how to save annotations made on a PDF document in the FDF (Forms Data Format) file format. FDF files can be used to store annotations separately from the original PDF document, which can be useful for collaboration and version control.
+This is an example that demonstrates the basic usage of the PDF Web Viewer, where
+the document is saved as FDF. There are two options to get the FDF data:
+
+- call the `save` method with `saveAsFdf: true` option to get the FDF data
+- call the `download` method with `saveAsFdf: true` option to download the FDF file

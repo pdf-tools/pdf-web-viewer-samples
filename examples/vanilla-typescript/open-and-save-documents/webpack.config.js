@@ -2,12 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const webViewerNodeModluesDir = path.dirname(
-  require.resolve('@pdftools/four-heights-pdf-web-viewer')
-);
+const packageDir = path.dirname(require.resolve('@pdftools/pdf-web-viewer'));
 
-const webViewerAssetsDir = path.join(webViewerNodeModluesDir, '../pdfwebviewer');
-const webViewerDocDir = path.join(webViewerNodeModluesDir, '../doc');
+const staticDir = path.join(packageDir, '../pdftools-web-viewer');
 
 module.exports = {
   entry: './src/index.ts',
@@ -38,14 +35,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build')
   },
   devServer: {
-    allowedHosts: 'all',
-    setupMiddlewares: (middlewares, devServer) => {
-      devServer.app.post('/upload', (req, res) => {
-        console.log('file uploaded');
-        res.json({ status: 'ok' });
-      });
-      return middlewares;
-    }
+    allowedHosts: 'all'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -55,14 +45,9 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: '*.pdf',
-          to: './',
-          context: webViewerDocDir
-        },
-        {
           from: '**/*',
-          to: 'pdfwebviewer',
-          context: webViewerAssetsDir
+          to: 'pdftools-web-viewer',
+          context: staticDir
         }
       ]
     })

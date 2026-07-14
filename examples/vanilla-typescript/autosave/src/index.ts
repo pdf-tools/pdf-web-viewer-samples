@@ -1,41 +1,15 @@
-import {
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-import './styles.scss';
+async function init() {
+  const container = document.getElementById('viewer-container')!;
+  const viewer = new PdfToolsViewer();
+  await viewer.initialize({}, container);
 
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    general: {
-      user: 'John Doe'
-    }
-  }
-};
-
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
-
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
-
-pdfViewer.addEventListener('documentChanged', async () => {
-  console.log('Document changed, saving PDF document');
-  const pdfData = await pdfViewer.save();
-
-  const res = await fetch('/upload', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/pdf'
-    },
-    body: pdfData
+  viewer.addEventListener('PdfTools.document.changed', async () => {
+    const savedDocument = await viewer.document.save();
+    console.log('Document saved:', savedDocument);
+    // @TODO: Do something with the saved document, e.g. send it to a server or store it locally.
   });
+}
 
-  if (res.ok) {
-    console.log('Document saved');
-  } else {
-    console.error('Saving document failed');
-  }
-});
+init();

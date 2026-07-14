@@ -1,3 +1,8 @@
-# Light / Dark theme switching
+# Switching themes
 
-This example showcases how to implement light and dark theme switching based on user preference. It is useful for providing users with a choice of different themes, and for ensuring that the PDF Web Viewer integrates well with the overall design of the website or application. The light bulb button in the top left corner is used for theme switching.
+This is an example that demonstrates the basic usage of the PDF Web Viewer, with the custom buttons to switch themes.
+In the example, we demonstrate the usage of the `ViewerConfig.theme` property and the following methods available on the `PdfToolsViewer` interface:
+
+- `getTheme`: Gets the currently applied theme.
+- `setTheme`: Sets the theme.
+- `getAvailableThemes`: Gets the list of all available themes.

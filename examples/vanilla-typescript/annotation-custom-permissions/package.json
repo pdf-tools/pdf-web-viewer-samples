@@ -1,5 +1,5 @@
 {
-  "name": "@pdf-tools/pdf-web-viewer-samples-vanilla-typescript-custom-permissions",
+  "name": "@pdf-tools/pdf-web-viewer-samples-vanilla-typescript-annotation-custom-permissions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@pdftools/four-heights-pdf-web-viewer": "4.3.6",
+    "@pdftools/pdf-web-viewer": "5.17.0",
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.7.1",
     "html-webpack-plugin": "5.5.0",

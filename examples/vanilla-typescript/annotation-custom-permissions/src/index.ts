@@ -1,29 +1,20 @@
-import {
-  Annotation,
-  PdfItemType,
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-import './styles.scss';
+async function init() {
+  const container = document.getElementById('viewer-container')!;
+  const viewer = new PdfToolsViewer();
+  await viewer.initialize({}, container);
 
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    general: {
-      user: 'John Doe'
-    }
-  },
-  annotation: {
-    annotationPermissionCallback: (annotation: Annotation, author: string) => {
-      return annotation.itemType === PdfItemType.UNDERLINE;
-    }
-  }
-};
+  // Hide components after initialize (DOM elements exist only after initialization)
+  viewer.hideComponents([
+    // In v4, permissions.enableSearch: false removes the search functionality.
+    // In v5, we are using the hideComponents API to remove the search functionality.
+    'search-button',
+    'search-panel',
+    // In v4, permissions.enablePageLayoutMode: false removes the page layout mode functionality.
+    // In v5, we are using the hideComponents API to remove the page layout mode functionality.
+    'page-mode-dropdown',
+  ]);
+}
 
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
-
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
+init();

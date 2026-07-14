@@ -1,25 +1,9 @@
-import {
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-import './styles.scss';
+async function init() {
+  const container = document.getElementById('viewer-container')!;
+  const viewer = new PdfToolsViewer();
+  await viewer.initialize({}, container);
+}
 
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    general: {
-      user: 'John Doe'
-    },
-    permissions: {
-      allowPrinting: true,
-    },
-  }
-};
-
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
-
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
+init();

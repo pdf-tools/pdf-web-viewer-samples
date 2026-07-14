@@ -1,37 +1,50 @@
-import {
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-import './scss/styles.scss';
+async function init() {
+    const container = document.getElementById('viewer-container')!;
+    const viewer = new PdfToolsViewer();
 
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    general: {
-      user: 'John Doe'
-    },
-    customButtons: {
-      documentbar: [
+    await viewer.initialize(
         {
-          text: 'Switch theme',
-          icon: '/images/light.svg',
-          onClick: () => {
-            if (document.body.getAttribute('data-theme') === 'light') {
-              document.body.setAttribute('data-theme', 'dark');
-            } else {
-              document.body.setAttribute('data-theme', 'light');
-            }
-          }
-        }
-      ]
+            theme: 'auto',
+        },
+        container
+    );
+
+    const btnLight = document.getElementById('btn-light');
+    const btnDark = document.getElementById('btn-dark');
+    const btnAuto = document.getElementById('btn-auto');
+    const status = document.getElementById('status')!;
+
+    function updateStatus() {
+        const currentTheme = viewer.getTheme();
+        const availableThemes = viewer.getAvailableThemes();
+        status.textContent = `Current: ${currentTheme} | Available:           
+  ${availableThemes.join(', ')}`;
+
+        document
+            .querySelectorAll('.controls button')
+            .forEach((btn) => btn.classList.remove('active'));
+        if (currentTheme === 'light') btnLight?.classList.add('active');
+        if (currentTheme === 'dark') btnDark?.classList.add('active');
     }
-  }
-};
 
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
+    btnLight?.addEventListener('click', () => {
+        viewer.setTheme('light');
+        updateStatus();
+    });
+    btnDark?.addEventListener('click', () => {
+        viewer.setTheme('dark');
+        updateStatus();
+    });
+    btnAuto?.addEventListener('click', () => {
+        viewer.setTheme('auto');
+        updateStatus();
+    });
 
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
+    updateStatus();
+    console.log('Available themes:', viewer.getAvailableThemes());
+    console.log('Current theme:', viewer.getTheme());
+}
+
+init();

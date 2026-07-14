@@ -1,54 +1,24 @@
-import {
-  PdfWebViewer,
-  PdfWebViewerOptionsInterface
-} from '@pdftools/four-heights-pdf-web-viewer';
-import './styles.scss';
+import { PdfToolsViewer } from '@pdftools/pdf-web-viewer';
 
-const viewerElement = document.querySelector<HTMLDivElement>('#pdfviewer');
-const license: string = '';
-const options: Partial<PdfWebViewerOptionsInterface> = {
-  viewer: {
-    permissions: {
-      allowFileDrop: false
-    },
-    callbacks: {
-      onOpenFileButtonClicked: handleOpenDocument,
-      onSaveFileButtonClicked: handleSaveDocument
-    }
-  }
-};
+async function init() {
+  const container = document.getElementById('viewer-container')!;
+  const viewer = new PdfToolsViewer();
+  await viewer.initialize({}, container);
 
-const pdfViewer = new PdfWebViewer(viewerElement, license, options);
-
-pdfViewer.addEventListener('appLoaded', () => {
-  pdfViewer.open({ uri: '/PdfWebViewer.pdf' });
-});
-
-async function handleOpenDocument() {
-  const res = await fetch('/PdfWebViewer.pdf');
-
-  if (res.ok) {
-    const blobData = await res.blob();
-    pdfViewer.open({ data: blobData });
-  } else {
-    console.error('open document failed');
-  }
-}
-
-async function handleSaveDocument() {
-  const pdfData = await pdfViewer.save();
-
-  const res = await fetch('/upload', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/pdf'
-    },
-    body: pdfData
+  viewer.overrideButtonBehavior('open-document-button', 'click', () => {
+    viewer.document.download('example.pdf', {
+      shouldApplyRedactions: true,
+    });
   });
 
-  if (res.ok) {
-    console.log('document saved');
-  } else {
-    console.error('save document failed');
-  }
+  viewer.overrideButtonBehavior('save-button', 'click', () => {
+    viewer.document.open({
+      // @NOTE: The 'uri' property should be replaced with the actual URL of the document you want to open.
+      'uri': 'url-to-document.pdf',
+    });
+  });
+
+
 }
+
+init();

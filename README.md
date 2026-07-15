@@ -34,4 +34,4 @@ Click on a link to open example in CodeSandbox.
 
 ### React Native
 
-- [React Native Integration](./examples/react-native) - WebView-based solution with local HTTP server
+- [React Native Integration](./examples/react-native) - WebView-based solution with local HTTP server (not available on CodeSandbox)

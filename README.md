@@ -1,10 +1,10 @@
-# PDF Web Viewer - CodeSandbox Samples
+# PDF Web Viewer - Samples
 
 Explore and experiment with usage examples of [@pdftools/pdf-web-viewer](https://www.npmjs.com/package/@pdftools/pdf-web-viewer).
 
 ## List of Examples
 
-Click on a link to open example in CodeSandbox.
+Click a link to open an example in CodeSandbox (where available).
 
 ### Getting Started
 

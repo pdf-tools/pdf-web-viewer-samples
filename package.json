@@ -5,6 +5,6 @@
     "upgrade": "node scripts/upgrade.js"
   },
   "dependencies": {
-    "shelljs": "^0.8.5"
+    "shelljs": "^0.10.0"
   }
 }

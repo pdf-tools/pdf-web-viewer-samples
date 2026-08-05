@@ -86,12 +86,18 @@ mkdir -p assets/pdf-viewer
 # Copy from npm package
 cp node_modules/@pdftools/pdf-web-viewer/umd/pdftools-web-viewer.min.js assets/pdf-viewer/
 cp node_modules/@pdftools/pdf-web-viewer/pdftools-web-viewer/* assets/pdf-viewer/
+
+# Copy your PDF file (required if using inputDocument in index.html)
+cp /path/to/your/document.pdf assets/pdf-viewer/WebViewer_v5_demo.pdf
 ```
 
 | Source Path | Copy To |
 | ------------- | --------- |
 | `dist/umd/pdftools-web-viewer.min.js` | `assets/pdf-viewer/` |
 | `dist/pdftools-web-viewer/*` (all files) | `assets/pdf-viewer/` |
+| Your PDF file | `assets/pdf-viewer/WebViewer_v5_demo.pdf` |
+
+> **Note**: The PDF file is not included in the npm package. If you use the `inputDocument` initialization parameter in `index.html`, you must copy your own PDF file to `assets/pdf-viewer/` and name it to match the URI (e.g., `WebViewer_v5_demo.pdf`).
 
 #### Create `index.html` inside `assets/pdf-viewer`
 

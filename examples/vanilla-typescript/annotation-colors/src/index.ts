@@ -50,4 +50,4 @@ async function init() {
   buttons.pastel.addEventListener('click', () => switchPalette('pastel'));
 }
 
-init();
+init().catch(console.error);

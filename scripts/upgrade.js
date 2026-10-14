@@ -14,7 +14,7 @@ if (!packageVersion)
     'Please provide new package version as second argument in order to update examples.'
   );
 
-shell.sed('-i', /tree\/[^\/]*/g, `tree/${branchName}`, 'README.md');
+shell.sed('-i', /tree\/.*?\/examples\//g, `tree/${branchName}/examples/`, 'README.md');
 
 const exampleDirectories = [];
 

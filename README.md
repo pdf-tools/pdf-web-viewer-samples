@@ -14,6 +14,7 @@ Click a link to open an example in CodeSandbox (where available).
 
 - Activate/Deactivate Annotation Modules - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/activate-deactivate-annotation-modules)
 - Annotation Custom Permissions - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/annotation-custom-permissions)
+- Annotation Colors - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/annotation-colors)
 - Save Annotations as FDF - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/save-annotations-as-fdf)
 
 ### Customization
@@ -21,6 +22,7 @@ Click a link to open an example in CodeSandbox (where available).
 - Custom Buttons - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/custom-buttons)
 - Custom Theme - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/custom-theme)
 - Light/Dark Theme Switching - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/light-dark-theme-switching)
+- Page Shadows - [Vanilla TypeScript](https://codesandbox.io/p/sandbox/github/pdf-tools/pdf-web-viewer-samples/tree/rel/5.19.0/examples/vanilla-typescript/page-shadows)
 
 ### Document Handling
 
